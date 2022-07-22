@@ -14,3 +14,49 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.text-white {
+  color: white;
+}
+
+.nav-title {
+  cursor: pointer;
+  font-size: 2vh;
+  /* centering vertically */
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.navigation {
+  position: -webkit-sticky; /* figure out */
+  position: sticky;         /* figure out */
+  background-color: #000;
+  overflow: hidden;
+  padding: 3.5vh;
+}
+
+ul {
+  display: flex;
+  list-style-type: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+li {
+  margin-left: 2vh;
+  text-decoration: none;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+li:hover {
+  color: aqua;
+}
