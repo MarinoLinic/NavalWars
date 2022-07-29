@@ -6,7 +6,7 @@ function Cornelius() {
 	console.log(useState('klemens')[0])
 	return (
 		<div>
-			<p>Klemsen er en sølvfisk</p>
+			<p>Klemsen er en bøsset sølvfisk</p>
 			<button onClick={() => setklemens(klemens + 's')}>Click me!</button>
 			{useState('klemens')[0]}
 			{klemens}
