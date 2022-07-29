@@ -21,7 +21,8 @@ a {
 
 .nav-title {
   cursor: pointer;
-  font-size: 2vh;
+  font-size: max(4vmin, 10px);
+  /* font-size: 2vh; */
   /* centering vertically */
   position: absolute;
   top: 50%;
