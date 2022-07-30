@@ -10,13 +10,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<div className="nav-title pull-left">
 					<Link href="/">Naval Wars</Link>
 				</div>
+
 				<ul className="pull-right">
 					<li className="nav-button">
 						<Link href="/klemsen">Play</Link>
 					</li>
 
 					<li className="nav-button">
-						<Link href="/klemsen">User profile</Link>
+						<Link href="/profile">User profile</Link>
+					</li>
+
+					<li className="nav-button">
+						<Link href="/klemsen">About</Link>
 					</li>
 
 					<li className="nav-button">
@@ -28,7 +33,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 					</li>
 				</ul>
 			</div>
-
 			<Component {...pageProps} />
 		</UserProvider>
 	)
