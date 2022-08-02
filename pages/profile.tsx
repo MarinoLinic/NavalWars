@@ -1,5 +1,5 @@
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const Profile = () => {
 	const { user, error, isLoading } = useUser()
@@ -21,7 +21,6 @@ const Profile = () => {
 	]
 
 	// var charList: any = []
-	console.log(charList)
 
 	if (isLoading) return <div>Loading...</div>
 	if (error) return <div>{error.message}</div>
@@ -74,18 +73,18 @@ const Profile = () => {
 				>
 					Confirm
 				</button>
-				<p style={{ fontWeight: 'bold' }}>{user.email}</p>
-				<div>
+				<p className="bold">{user.email}</p>
+				<div className="character-list">
 					{charList.map((item: any) => (
-						<div key={item.name}>
-							<div>{item.name}</div>
+						<div key={item.id} className="character-individual">
+							<div>Character: {item.name}</div>
 							<img
 								src={item.img}
 								alt="Character image"
 								height="100px"
 								width="100px"
 							/>
-							<div>{item.owner}</div>
+							<div>Owner: {item.owner}</div>
 						</div>
 					))}
 				</div>
@@ -93,8 +92,8 @@ const Profile = () => {
 					Add character
 				</button>
 				<div>
-					{characterEditIsShown && (
-						<div style={{ margin: '2vh' }}>
+					{characterEditIsShown && charList.length <= 11 && (
+						<div className="margin-test">
 							<label>
 								Set character name: ‎
 								<input
@@ -102,6 +101,7 @@ const Profile = () => {
 									type="text"
 									autoComplete="off"
 									placeholder="Set character name..."
+									onChange={(e) => changeCharacterName(e.target.value)}
 								/>
 							</label>
 
@@ -117,15 +117,16 @@ const Profile = () => {
 
 							<button
 								onClick={() => {
-									setName(changeCharacterName, inputRef.current.value)
 									setCharList([
 										...charList,
 										{
+											id: Math.floor(Math.random() * 10000000000000),
 											name: characterName,
 											img: chars[charNum],
 											owner: user && user.name
 										}
 									])
+									setName(changeCharacterName, '')
 									changeCharNum(Math.floor(Math.random() * 4))
 									setCharacterEditIsShown(false)
 								}}

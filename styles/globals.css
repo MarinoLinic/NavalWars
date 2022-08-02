@@ -15,6 +15,14 @@ a {
 	box-sizing: border-box;
 }
 
+.margin-test {
+	margin: 2vh;
+}
+
+.bold {
+	font-weight: bold;
+}
+
 .text-white {
 	color: white;
 }
@@ -65,4 +73,13 @@ li:hover {
 .container {
 	margin: 2vh;
 	text-align: center;
+}
+
+.character-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.character-individual {
+	margin: 2vh;
 }
