@@ -1,5 +1,4 @@
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { profile } from 'console'
 import { useState } from 'react'
 import { useRef } from 'react'
 
@@ -7,7 +6,7 @@ const Profile = () => {
 	const { user, error, isLoading } = useUser()
 	const [profileName, changeProfileName] = useState(user && user.name)
 	const [characterEditIsShown, setCharacterEditIsShown] = useState(false)
-	const [characterName, changeCharacterName] = useState('Char')
+	const [characterName, changeCharacterName] = useState('Character')
 	const inputRef = useRef(null) as any
 
 	let profilePicture = (user && user.picture) || '/sailing_ship.png' // if the gmail profile picture is not available, use the default; nullish coalescing probably unnecessary

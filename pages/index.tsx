@@ -7,11 +7,11 @@ import styles from '../styles/Home.module.css'
 const Home: NextPage = () => {
 	return (
 		<div className={styles.container}>
-			<Head>
+			<UserProvider>
 				<title>Naval Wars</title>
 				<meta name="description" content="Naval Wars, the web game." />
 				<link rel="icon" href="/favicon.ico" />
-			</Head>
+			</UserProvider>
 
 			<main className={styles.main}></main>
 
