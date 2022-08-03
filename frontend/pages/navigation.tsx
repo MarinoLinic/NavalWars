@@ -15,7 +15,7 @@ const Navigation = () => {
 
 			<ul className="pull-right">
 				<li className="nav-button">
-					<Link href="/klemsen">Play</Link>
+					<Link href="/play">Play</Link>
 				</li>
 
 				<li className="nav-button">

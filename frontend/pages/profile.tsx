@@ -3,7 +3,7 @@ import { useState, useRef } from 'react'
 import { avAvatars } from '../utils/variables/character_avatars'
 import { MAX_CHARACTERS } from '../utils/variables/global'
 
-const Profile = () => {
+function Profile() {
 	const { user, error, isLoading } = useUser()
 	if (isLoading) return <div>Loading...</div> // Loading screen
 	if (error) return <div>{error.message}</div>
@@ -12,8 +12,8 @@ const Profile = () => {
 	const [characterEditIsShown, setCharacterEditIsShown] = useState(false)
 	const [edit, setEdit] = useState(false)
 	const [profileName, setProfileName] = useState(user?.name)
-	const [charName, setCharName] = useState(user && user.name + "'s character")
-	const [charList, setCharList] = useState([]) as any
+	const [characterName, setCharacterName] = useState(user && user.name + "'s character")
+	const [characterList, setCharacterList] = useState([]) as Array<any>
 	const [numAvatar, setNumAvatar] = useState(Math.floor(Math.random() * 4))
 
 	const inputRef = useRef(null) as any
@@ -57,7 +57,7 @@ const Profile = () => {
 
 				{/* Character list */}
 				<div className="character-list">
-					{charList.map((item: any) => (
+					{characterList.map((item: any) => (
 						<div key={item.id} className="character-individual">
 							<div>Character: {item.name}</div>
 							<img src={item.img} alt="Character image" height="100px" width="100px" />
@@ -74,14 +74,14 @@ const Profile = () => {
 											name="Character name"
 											autoComplete="off"
 											placeholder="Set character name..."
-											onChange={(e) => setCharName(e.target.value)}
+											onChange={(e) => setCharacterName(e.target.value)}
 										/>
 										<button
 											onClick={() => {
-												if (charName == '') alert(`Character name is empty.`)
+												if (characterName == '') alert(`Character name is empty.`)
 												else {
-													charList[0].name = charName
-													setCharName('')
+													characterList[0].name = characterName
+													setCharacterName('')
 													setEdit(false)
 												}
 											}}>
@@ -98,12 +98,12 @@ const Profile = () => {
 				<button
 					onClick={() => {
 						setCharacterEditIsShown(true)
-						if (charList.length > MAX_CHARACTERS) setTimeout(() => setCharacterEditIsShown(false), 5000) // 5 second timer for warning to disappear
+						if (characterList.length > MAX_CHARACTERS) setTimeout(() => setCharacterEditIsShown(false), 5000) // 5 second timer for warning to disappear
 					}}>
 					Add character
 				</button>
 				<div>
-					{characterEditIsShown && !edit && charList.length <= MAX_CHARACTERS && (
+					{characterEditIsShown && !edit && characterList.length <= MAX_CHARACTERS && (
 						<div className="margin-test">
 							<label>
 								Set character name: ‎
@@ -113,7 +113,7 @@ const Profile = () => {
 									name="Character name"
 									autoComplete="off"
 									placeholder="Set character name..."
-									onChange={(e) => setCharName(e.target.value)}
+									onChange={(e) => setCharacterName(e.target.value)}
 								/>
 							</label>
 
@@ -124,18 +124,18 @@ const Profile = () => {
 
 							<button
 								onClick={() => {
-									if (charName == '') alert(`Character name is empty.`)
+									if (characterName == '') alert(`Character name is empty.`)
 									else {
-										setCharList([
-											...charList,
+										setCharacterList([
+											...characterList,
 											{
 												id: Math.floor(Math.random() * 10000000000000),
-												name: charName,
+												name: characterName,
 												img: avAvatars[numAvatar],
 												owner: user?.name
 											}
 										])
-										setCharName('')
+										setCharacterName('')
 										setNumAvatar(Math.floor(Math.random() * 4))
 										setCharacterEditIsShown(false)
 									}
@@ -146,7 +146,9 @@ const Profile = () => {
 					)}
 				</div>
 				<div>
-					{characterEditIsShown && charList.length > MAX_CHARACTERS && <p className="red">Character limit reached.</p>}
+					{characterEditIsShown && characterList.length > MAX_CHARACTERS && (
+						<p className="red">Character limit reached.</p>
+					)}
 				</div>
 			</div>
 		)
