@@ -1,6 +1,6 @@
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useState, useRef } from 'react'
-import { avAvatars } from '../utils/variables/character_avatars'
+import { characterImgAvatars } from '../utils/variables/character_avatars'
 import { MAX_CHARACTERS } from '../utils/variables/global'
 
 function Profile() {
@@ -9,22 +9,22 @@ function Profile() {
 	if (error) return <div>{error.message}</div>
 
 	// useState hooks
-	const [characterEditIsShown, setCharacterEditIsShown] = useState(false)
+	const [characterCreationIsShown, setCharacterCreationIsShown] = useState(false)
 	const [edit, setEdit] = useState(false)
 	const [profileName, setProfileName] = useState(user?.name)
 	const [characterName, setCharacterName] = useState(user && user.name + "'s character")
 	const [characterList, setCharacterList] = useState([]) as Array<any>
-	const [numAvatar, setNumAvatar] = useState(Math.floor(Math.random() * 4))
+	const [numAvatar, setNumAvatar] = useState(Math.floor(Math.random() * characterImgAvatars.length))
 
 	const inputRef = useRef(null) as any
 
 	// Switch between available character avatars
 	const numAvatarChange = (charForward: boolean) => {
-		if (charForward && numAvatar < avAvatars.length - 1) setNumAvatar(numAvatar + 1)
+		if (charForward && numAvatar < characterImgAvatars.length - 1) setNumAvatar(numAvatar + 1)
 		else if (!charForward && numAvatar > 0) setNumAvatar(numAvatar - 1)
 
-		if (charForward && numAvatar === avAvatars.length - 1) setNumAvatar(0)
-		else if (!charForward && numAvatar === 0) setNumAvatar(avAvatars.length - 1)
+		if (charForward && numAvatar === characterImgAvatars.length - 1) setNumAvatar(0)
+		else if (!charForward && numAvatar === 0) setNumAvatar(characterImgAvatars.length - 1)
 	}
 
 	// DOESN'T WORK YET | if the gmail profile picture is not available, use the default; nullish coalescing probably unnecessary
@@ -97,13 +97,13 @@ function Profile() {
 				{/* Add a new character */}
 				<button
 					onClick={() => {
-						setCharacterEditIsShown(true)
-						if (characterList.length > MAX_CHARACTERS) setTimeout(() => setCharacterEditIsShown(false), 5000) // 5 second timer for warning to disappear
+						setCharacterCreationIsShown(true)
+						if (characterList.length > MAX_CHARACTERS) setTimeout(() => setCharacterCreationIsShown(false), 5000) // 5 second timer for warning to disappear
 					}}>
 					Add character
 				</button>
 				<div>
-					{characterEditIsShown && !edit && characterList.length <= MAX_CHARACTERS && (
+					{characterCreationIsShown && !edit && characterList.length <= MAX_CHARACTERS && (
 						<div className="margin-test">
 							<label>
 								Set character name: ‎
@@ -119,7 +119,7 @@ function Profile() {
 
 							<p>Choose character avatar</p>
 							<button onClick={() => numAvatarChange(false)}>{'<'}</button>
-							<img src={avAvatars[numAvatar]} alt="Character avatar" height="200px" width="200px"></img>
+							<img src={characterImgAvatars[numAvatar]} alt="Character avatar" height="200px" width="200px"></img>
 							<button onClick={() => numAvatarChange(true)}>{'>'}</button>
 
 							<button
@@ -131,13 +131,16 @@ function Profile() {
 											{
 												id: Math.floor(Math.random() * 10000000000000),
 												name: characterName,
-												img: avAvatars[numAvatar],
+												img: characterImgAvatars[numAvatar],
 												owner: user?.name
 											}
 										])
 										setCharacterName('')
-										setNumAvatar(Math.floor(Math.random() * 4))
-										setCharacterEditIsShown(false)
+										setNumAvatar(Math.floor(Math.random() * characterImgAvatars.length))
+										{
+											console.log(numAvatar)
+										}
+										setCharacterCreationIsShown(false)
 									}
 								}}>
 								Submit
@@ -146,7 +149,7 @@ function Profile() {
 					)}
 				</div>
 				<div>
-					{characterEditIsShown && characterList.length > MAX_CHARACTERS && (
+					{characterCreationIsShown && characterList.length > MAX_CHARACTERS && (
 						<p className="red">Character limit reached.</p>
 					)}
 				</div>

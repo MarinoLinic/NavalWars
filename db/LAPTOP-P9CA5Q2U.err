@@ -57,3 +57,26 @@
 2022-08-03T19:57:14.826009Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: ready for connections. Version: '8.0.29'  socket: ''  port: 3306  MySQL Community Server - GPL.
 2022-08-03T19:57:18.974018Z 0 [System] [MY-013105] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: Normal shutdown.
 2022-08-03T19:57:19.938768Z 0 [System] [MY-010910] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: Shutdown complete (mysqld 8.0.29)  MySQL Community Server - GPL.
+2022-08-04T20:23:11.192820Z 0 [Warning] [MY-010915] [Server] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2022-08-04T20:23:11.194533Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe (mysqld 8.0.30) starting as process 82260
+2022-08-04T20:23:11.218386Z 0 [Warning] [MY-013907] [InnoDB] Deprecated configuration parameters innodb_log_file_size and/or innodb_log_files_in_group have been used to compute innodb_redo_log_capacity=100663296. Please use innodb_redo_log_capacity instead.
+2022-08-04T20:23:11.222749Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-08-04T20:23:11.375592Z 1 [ERROR] [MY-013860] [InnoDB] --initialize specified but the redo log directory .\#innodb_redo\ has redo log files inside. Aborting.
+2022-08-04T20:23:11.376583Z 1 [ERROR] [MY-012930] [InnoDB] Plugin initialization aborted with error Generic error.
+2022-08-04T20:23:11.402452Z 1 [ERROR] [MY-010334] [Server] Failed to initialize DD Storage Engine
+2022-08-04T20:23:11.403706Z 0 [ERROR] [MY-010020] [Server] Data Dictionary initialization failed.
+2022-08-04T20:23:11.404296Z 0 [ERROR] [MY-010119] [Server] Aborting
+2022-08-04T20:23:11.405045Z 0 [System] [MY-010910] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: Shutdown complete (mysqld 8.0.30)  MySQL Community Server - GPL.
+2022-08-04T20:23:14.790338Z 0 [Warning] [MY-010915] [Server] 'NO_ZERO_DATE', 'NO_ZERO_IN_DATE' and 'ERROR_FOR_DIVISION_BY_ZERO' sql modes should be used with strict mode. They will be merged with strict mode in a future release.
+2022-08-04T20:23:14.792572Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe (mysqld 8.0.30) starting as process 62308
+2022-08-04T20:23:14.811673Z 0 [Warning] [MY-013907] [InnoDB] Deprecated configuration parameters innodb_log_file_size and/or innodb_log_files_in_group have been used to compute innodb_redo_log_capacity=100663296. Please use innodb_redo_log_capacity instead.
+2022-08-04T20:23:14.817678Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-08-04T20:23:15.282617Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-08-04T20:23:17.230090Z 4 [System] [MY-013381] [Server] Server upgrade from '80029' to '80030' started.
+2022-08-04T20:23:20.989199Z 4 [System] [MY-013381] [Server] Server upgrade from '80029' to '80030' completed.
+2022-08-04T20:23:21.125553Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2022-08-04T20:23:21.126254Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2022-08-04T20:23:21.148832Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
+2022-08-04T20:23:21.148931Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: ready for connections. Version: '8.0.30'  socket: ''  port: 3306  MySQL Community Server - GPL.
+2022-08-04T20:23:23.501806Z 0 [System] [MY-013105] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: Normal shutdown.
+2022-08-04T20:23:25.107273Z 0 [System] [MY-010910] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: Shutdown complete (mysqld 8.0.30)  MySQL Community Server - GPL.

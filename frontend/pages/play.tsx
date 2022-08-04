@@ -1,13 +1,13 @@
-import { useUser } from '@auth0/nextjs-auth0'
+import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 function Play() {
 	const { user, error, isLoading } = useUser()
 
 	return (
 		<>
-			<p></p>
+			<p>This is the entire game. Enjoy. XD</p>
 		</>
 	)
 }
 
-export default Play
+export default withPageAuthRequired(Play as any)
