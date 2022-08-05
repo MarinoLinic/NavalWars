@@ -1,4 +1,5 @@
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
+import { type } from 'os'
 import { useState, useRef } from 'react'
 import { characterImgAvatars } from '../utils/variables/character_avatars'
 import { MAX_CHARACTERS } from '../utils/variables/global'
@@ -15,18 +16,20 @@ function Profile() {
 	const [characterName, setCharacterName] = useState(user && user.name + "'s character")
 	const [characterList, setCharacterList] = useState([]) as Array<any>
 	const [numAvatar, setNumAvatar] = useState(Math.floor(Math.random() * characterImgAvatars.length))
+	const [editKey, setEditKey] = useState() // used for determining which character to manipulate when pressing button
 
 	const inputRef = useRef(null) as any
 
 	// Switch between available character avatars
-	const numAvatarChange = (charForward: boolean) => {
-		if (charForward && numAvatar < characterImgAvatars.length - 1) setNumAvatar(numAvatar + 1)
-		else if (!charForward && numAvatar > 0) setNumAvatar(numAvatar - 1)
+	const avatarScroll = (characterAvatarForward: boolean) => {
+		if (characterAvatarForward && numAvatar < characterImgAvatars.length - 1) setNumAvatar(numAvatar + 1)
+		else if (!characterAvatarForward && numAvatar > 0) setNumAvatar(numAvatar - 1)
 
-		if (charForward && numAvatar === characterImgAvatars.length - 1) setNumAvatar(0)
-		else if (!charForward && numAvatar === 0) setNumAvatar(characterImgAvatars.length - 1)
+		if (characterAvatarForward && numAvatar === characterImgAvatars.length - 1) setNumAvatar(0)
+		else if (!characterAvatarForward && numAvatar === 0) setNumAvatar(characterImgAvatars.length - 1)
 	}
 
+	// Variables
 	// DOESN'T WORK YET | if the gmail profile picture is not available, use the default; nullish coalescing probably unnecessary
 	let profilePicture = user?.picture || '/sailing_ship.png' // user?.picture == user && user.picture
 
@@ -62,11 +65,27 @@ function Profile() {
 							<div>Character: {item.name}</div>
 							<img src={item.img} alt="Character image" height="100px" width="100px" />
 							<div>Owner: {item.owner}</div>
-							<button onClick={() => setEdit(true)}>Edit</button>
+							<button
+								onClick={() => {
+									setEdit(true)
+									setEditKey(item.id)
+								}}>
+								Edit
+							</button>
+							<button
+								onClick={() => {
+									for (let i = 0; i < characterList.length; i++) {
+										if (characterList[i].id == item.id) {
+											setCharacterList(characterList.filter((index: any) => index.id != item.id))
+										}
+									}
+								}}>
+								Delete
+							</button>
 
 							{/* Character edit */}
 							<div>
-								{edit && (
+								{edit && editKey === item.id && (
 									<label>
 										Set character name: ‎
 										<input
@@ -80,7 +99,9 @@ function Profile() {
 											onClick={() => {
 												if (characterName == '') alert(`Character name is empty.`)
 												else {
-													characterList[0].name = characterName
+													for (let i = 0; i < characterList.length; i++) {
+														if (characterList[i].id == editKey) characterList[i].name = characterName
+													}
 													setCharacterName('')
 													setEdit(false)
 												}
@@ -118,18 +139,18 @@ function Profile() {
 							</label>
 
 							<p>Choose character avatar</p>
-							<button onClick={() => numAvatarChange(false)}>{'<'}</button>
+							<button onClick={() => avatarScroll(false)}>{'<'}</button>
 							<img src={characterImgAvatars[numAvatar]} alt="Character avatar" height="200px" width="200px"></img>
-							<button onClick={() => numAvatarChange(true)}>{'>'}</button>
+							<button onClick={() => avatarScroll(true)}>{'>'}</button>
 
 							<button
 								onClick={() => {
 									if (characterName == '') alert(`Character name is empty.`)
 									else {
 										setCharacterList([
-											...characterList,
+											...characterList, // every element thus far in the list
 											{
-												id: Math.floor(Math.random() * 10000000000000),
+												id: Math.floor(Math.random() * 10000000000000), // that's 1 billion
 												name: characterName,
 												img: characterImgAvatars[numAvatar],
 												owner: user?.name
@@ -137,9 +158,6 @@ function Profile() {
 										])
 										setCharacterName('')
 										setNumAvatar(Math.floor(Math.random() * characterImgAvatars.length))
-										{
-											console.log(numAvatar)
-										}
 										setCharacterCreationIsShown(false)
 									}
 								}}>

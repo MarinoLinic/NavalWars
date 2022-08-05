@@ -1,3 +1,15 @@
+/*
+CTRL + , (VS Code settings)
+Type "unknown"
+CSS -> Lint: Unknown At Rules => choose "ignore"
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*/
+
 html,
 body {
 	padding: 0;

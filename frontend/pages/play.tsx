@@ -5,7 +5,7 @@ function Play() {
 
 	return (
 		<>
-			<p>This is the entire game. Enjoy. XD</p>
+			<p className="container">This is the entire game. Enjoy. XD</p>
 		</>
 	)
 }

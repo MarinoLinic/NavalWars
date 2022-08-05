@@ -8,7 +8,8 @@ const Navigation = () => {
 	if (error) return <div>{error.message}</div>
 
 	return (
-		<div className="navigation text-white">
+		<div className="navigation text-white text-3xl font-bold">
+			{/* Last two ^above are Tailwind classes that aren't utilized yet */}
 			<div className="nav-title pull-left">
 				<Link href="/">Naval Wars</Link>
 			</div>
