@@ -119,7 +119,8 @@ function Profile() {
 				<button
 					onClick={() => {
 						setCharacterCreationIsShown(true)
-						if (characterList.length > MAX_CHARACTERS) setTimeout(() => setCharacterCreationIsShown(false), 5000) // 5 second timer for warning to disappear
+						if (characterList.length > MAX_CHARACTERS)
+							setTimeout(() => setCharacterCreationIsShown(false), 5000) // 5 second timer for warning to disappear
 					}}>
 					Add character
 				</button>
@@ -140,7 +141,11 @@ function Profile() {
 
 							<p>Choose character avatar</p>
 							<button onClick={() => avatarScroll(false)}>{'<'}</button>
-							<img src={characterImgAvatars[numAvatar]} alt="Character avatar" height="200px" width="200px"></img>
+							<img
+								src={characterImgAvatars[numAvatar]}
+								alt="Character avatar"
+								height="200px"
+								width="200px"></img>
 							<button onClick={() => avatarScroll(true)}>{'>'}</button>
 
 							<button

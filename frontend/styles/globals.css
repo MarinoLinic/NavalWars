@@ -3,21 +3,44 @@ CTRL + , (VS Code settings)
 Type "unknown"
 CSS -> Lint: Unknown At Rules => choose "ignore"
 
+*/
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*/
-
 html,
 body {
 	padding: 0;
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-		Helvetica Neue, sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+		Droid Sans, Helvetica Neue, sans-serif;
 }
 
+/* Scrollbar */
+/* Width */
+::-webkit-scrollbar {
+	width: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #188;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #155;
+}
+
+/* Tailwind classes */
+.btn-primary {
+	@apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
+}
+
+/*
 a {
 	color: inherit;
 	text-decoration: none;
@@ -43,7 +66,8 @@ a {
 	cursor: pointer;
 	font-size: max(4vmin, 10px);
 	/* font-size: 2vh; */
-	/* centering vertically */
+/* centering vertically */
+/*
 	position: absolute;
 	top: 50%;
 	-ms-transform: translateY(-50%);
@@ -52,7 +76,9 @@ a {
 
 .navigation {
 	position: -webkit-sticky; /* figure out */
-	position: sticky; /* figure out */
+/*	
+position: sticky; /* figure out */
+/*
 	background-color: #000;
 	overflow: hidden;
 	padding: 3.5vh;
@@ -95,8 +121,11 @@ li:hover {
 .character-individual {
 	margin: 2vh;
 	/* background-color: pink; */
+/*
 }
 
 .red {
 	color: red;
 }
+
+*/
