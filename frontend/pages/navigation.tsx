@@ -8,127 +8,103 @@ const Navigation = () => {
 	if (isLoading) return <div>Loading...</div>
 	if (error) return <div>{error.message}</div>
 
+	// Variables
+	// DOESN'T WORK YET | if the gmail profile picture is not available, use the default; nullish coalescing probably unnecessary
+	let profilePicture = user?.picture || '/sailing_ship.png' // user?.picture == user && user.picture
+
 	return (
-		<nav className="border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 light:bg-gray-900">
-			<div className="text-white font-semibold container flex flex-wrap justify-between items-center mx-auto">
+		<nav
+			className="
+		sticky top-0 flex flex-col items-center py-4 border-gray-200 
+		bg-gradient-to-r from-black to-gray-900
+		">
+			<div className="flex flex-wrap text-white font-semibold container justify-between mx-auto">
 				<Link href="/">
-					<div className="flex items-center cursor-pointer">
+					<div className="flex w-1/3 items-center cursor-pointer">
 						<img src="/sailing_ship.png" className="mr-3 h-6 sm:h-9" alt="Naval Wars Logo" />
-						<span className="self-center text-3xl font-bold whitespace-nowrap dark:text-white">
-							Naval Wars
-						</span>
+						<span className="self-center text-3xl font-bold whitespace-nowrap">Naval Wars</span>
 					</div>
 				</Link>
 
-				<ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+				<div
+					className="
+				flex flex-row w-1/3 items-center justify-center
+				">
+					<Link href="/play">
+						<button
+							className="
+						text-cyan-500 hover:text-white text-3xl font-bold
+						px-8 py-3 bg-gray-800 rounded-2xl hover:bg-gray-600
+						">
+							PLAY
+						</button>
+					</Link>
+				</div>
+
+				<div className="flex flex-row w-1/3 items-center justify-end">
 					{[
-						['Play', '/play'],
 						['Profile', '/profile'],
 						['About', '/klemsen']
 					].map(([title, url]) => (
-						<li className="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+						<div className="mx-5 text-gray-500 hover:text-white">
 							<Link href={url}>{title}</Link>
-						</li>
+						</div>
 					))}
 
-					{user && (
-						<li className="nav-button">
-							<Link href="/api/auth/logout">Log out</Link>
-						</li>
-					)}
-
 					{!user && (
-						<li className="nav-button">
+						<div className="mx-5 text-gray-500 hover:text-white">
 							<Link href="/api/auth/login">Log In</Link>
-						</li>
+						</div>
 					)}
-				</ul>
 
-				{/* Dropdown menu | https://codesandbox.io/s/xrxw8?file=/pages/index.tsx */}
-				<DropdownMenu.Root>
-					<DropdownMenu.Trigger>
-						<button
-							className="flex mr-8 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-							id="profile-menu-button">
-							<span className="sr-only">Open user menu</span>
-							<img className="w-8 h-8 rounded-full" src={user?.picture} alt="User photo" />
-						</button>
-					</DropdownMenu.Trigger>
-					{/* Portals the content into the body */}
-					<DropdownMenu.Portal>
-						<DropdownMenu.Content className="py-1 bg-black text-white flex items-center md:order-2">
-							<DropdownMenu.Label>{user?.name}</DropdownMenu.Label>
-							<DropdownMenu.Group className="">
-								{[
-									['Profile', '/profile'],
-									['Characters', '/profile'],
-									['Log out', '/api/auth/logout']
-								].map(([title, url]) => (
-									<Link href={url}>
-										<DropdownMenu.Item className="block py-2 px-4 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-											{title}
+					{user && (
+						<DropdownMenu.Root>
+							<DropdownMenu.Trigger>
+								<button
+									className="flex mx-5 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+									id="profile-menu-button">
+									<span className="sr-only">Open user menu</span>
+									<img className="w-10 h-10 rounded-full" src={profilePicture} alt="User photo" />
+								</button>
+							</DropdownMenu.Trigger>
+							{/* Portals the content into the body */}
+							<DropdownMenu.Portal>
+								<DropdownMenu.Content
+									loop
+									sticky="always"
+									align="center"
+									side="bottom"
+									sideOffset={10}
+									className="mx-8 py-1 bg-gray-800 text-white flex items-center md:order-2">
+									<DropdownMenu.Group className="flex flex-col items-center mx-3">
+										<DropdownMenu.Item>
+											<img className="w-12 h-12" src={profilePicture} alt="User photo" />
 										</DropdownMenu.Item>
-									</Link>
-								))}
-							</DropdownMenu.Group>
-						</DropdownMenu.Content>
-					</DropdownMenu.Portal>
-				</DropdownMenu.Root>
-
-				{/*
-				// <div className="flex items-center md:order-2">
-				// 	<button
-				// 		type="button"
-				// 		className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-				// 		id="user-menu-button"
-				// 		aria-expanded="false"
-				// 		data-dropdown-toggle="user-dropdown"
-				// 		data-dropdown-placement="bottom">
-				// 		<span className="sr-only">Open user menu</span>
-				// 		<img className="w-8 h-8 rounded-full" src="/sailing_ship.png" alt="User photo" />
-				// 	</button>
-				// 	<div
-				// 		className="z-50 my-4 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-				// 		id="user-dropdown">
-				// 		<div className="py-3 px-4">
-				// 			<span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-				// 			<span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">
-				// 				your.name@navalwars.com
-				// 			</span>
-				// 		</div>
-				// 		<ul className="py-1" aria-labelledby="user-menu-button">
-				// 			{[
-				// 				['Profile', '/profile'],
-				// 				['Characters', '/profile'],
-				// 				['Log out', '/klemsen']
-				// 			].map(([title, url]) => (
-				// 				<li className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-				// 					<Link href={url}>{title}</Link>
-				// 				</li>
-				// 			))}
-				// 		</ul>
-				// 	</div>
-				// 	<button
-				// 		data-collapse-toggle="mobile-menu-2"
-				// 		type="button"
-				// 		className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-				// 		aria-controls="mobile-menu-2"
-				// 		aria-expanded="false">
-				// 		<span className="sr-only">Open main menu</span>
-				// 		<svg
-				// 			className="w-6 h-6"
-				// 			aria-hidden="true"
-				// 			fill="currentColor"
-				// 			viewBox="0 0 20 20"
-				// 			xmlns="http://www.w3.org/2000/svg">
-				// 			<path
-				// 				fill-rule="evenodd"
-				// 				d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-				// 				clip-rule="evenodd"></path>
-				// 		</svg>
-				// 	</button>
-				// </div>
-		*/}
+										<DropdownMenu.Item>{user?.name}</DropdownMenu.Item>
+									</DropdownMenu.Group>
+									<DropdownMenu.Group className="flex flex-col">
+										{[
+											['Profile', '/profile'],
+											['Characters', '/characters']
+										].map(([title, url]) => (
+											<Link href={url}>
+												<DropdownMenu.Item className="block py-2 px-4 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+													{title}
+												</DropdownMenu.Item>
+											</Link>
+										))}
+										<DropdownMenu.Separator className="my-1 border-t-2 border-gray-400" />
+										<Link href="/api/auth/logout">
+											<DropdownMenu.Item className="block py-2 px-4 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+												Log out
+											</DropdownMenu.Item>
+										</Link>
+									</DropdownMenu.Group>
+								</DropdownMenu.Content>
+							</DropdownMenu.Portal>
+						</DropdownMenu.Root>
+					)}
+				</div>
 			</div>
 		</nav>
 	)

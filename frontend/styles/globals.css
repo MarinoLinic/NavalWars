@@ -9,9 +9,11 @@ CSS -> Lint: Unknown At Rules => choose "ignore"
 @tailwind components;
 @tailwind utilities;
 
+/* 
 html {
-	/* overflow: scroll; /* remove scrollbar */
+	overflow: scroll; /* remove scrollbar 
 }
+*/
 
 html,
 body {
@@ -32,11 +34,11 @@ body {
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #188;
+	background: rgb(212, 221, 221);
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #155;
+	background: rgb(185, 201, 201);
 }
 
 /* Tailwind classes */
