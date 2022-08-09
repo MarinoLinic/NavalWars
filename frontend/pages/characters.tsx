@@ -33,60 +33,62 @@ function Characters() {
 	}
 
 	return (
-		<div className="character-list">
-			{characterList.map((item: any) => (
-				<div key={item.id} className="character-individual">
-					<div>Character: {item.name}</div>
-					<img src={item.img} alt="Character image" height="100px" width="100px" />
-					<div>Owner: {item.owner}</div>
-					<button
-						onClick={() => {
-							setEdit(true)
-							setEditKey(item.id)
-						}}>
-						Edit
-					</button>
-					<button
-						onClick={() => {
-							for (let i = 0; i < characterList.length; i++) {
-								if (characterList[i].id == item.id) {
-									setCharacterList(characterList.filter((index: any) => index.id != item.id))
+		<div className="container mt-16 mb-8 mx-16">
+			<div className="container grid grid-cols-4 gap-4 items-center">
+				{characterList.map((item: any) => (
+					<div key={item.id} className="justify-self-center">
+						<div>Character: {item.name}</div>
+						<img src={item.img} alt="Character image" height="100px" width="100px" />
+						<div>Owner: {item.owner}</div>
+						<button
+							onClick={() => {
+								setEdit(true)
+								setEditKey(item.id)
+							}}>
+							Edit
+						</button>
+						<button
+							onClick={() => {
+								for (let i = 0; i < characterList.length; i++) {
+									if (characterList[i].id == item.id) {
+										setCharacterList(characterList.filter((index: any) => index.id != item.id))
+									}
 								}
-							}
-						}}>
-						Delete
-					</button>
+							}}>
+							Delete
+						</button>
 
-					{/* Character edit */}
-					<div>
-						{edit && editKey === item.id && (
-							<label>
-								Set character name: ‎
-								<input
-									type="text"
-									name="Character name"
-									autoComplete="off"
-									placeholder="Set character name..."
-									onChange={(e) => setCharacterName(e.target.value)}
-								/>
-								<button
-									onClick={() => {
-										if (characterName == '') alert(`Character name is empty.`)
-										else {
-											for (let i = 0; i < characterList.length; i++) {
-												if (characterList[i].id == editKey) characterList[i].name = characterName
+						{/* Character edit */}
+						<div>
+							{edit && editKey === item.id && (
+								<label>
+									Set character name: ‎
+									<input
+										type="text"
+										name="Character name"
+										autoComplete="off"
+										placeholder="Set character name..."
+										onChange={(e) => setCharacterName(e.target.value)}
+									/>
+									<button
+										onClick={() => {
+											if (characterName == '') alert(`Character name is empty.`)
+											else {
+												for (let i = 0; i < characterList.length; i++) {
+													if (characterList[i].id == editKey) characterList[i].name = characterName
+												}
+												setCharacterName('')
+												setEdit(false)
 											}
-											setCharacterName('')
-											setEdit(false)
-										}
-									}}>
-									Submit
-								</button>
-							</label>
-						)}
+										}}>
+										Submit
+									</button>
+								</label>
+							)}
+						</div>
 					</div>
-				</div>
-			))}
+				))}
+			</div>
 
 			{/* Add a new character */}
 			<button

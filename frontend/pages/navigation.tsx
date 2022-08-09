@@ -43,7 +43,8 @@ const Navigation = () => {
 
 				<div className="flex flex-row w-1/3 items-center justify-end">
 					{[
-						['Profile', '/profile'],
+						['News', '/klemsen'],
+						['Rankings', '/klemsen'],
 						['About', '/klemsen']
 					].map(([title, url]) => (
 						<div className="mx-5 text-gray-500 hover:text-white">
