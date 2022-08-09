@@ -5,7 +5,7 @@ function Play() {
 
 	return (
 		<>
-			<p className="container">This is the entire game. Enjoy. XD</p>
+			<p className="flex justify-center mt-8">This is the entire game. Enjoy. XD</p>
 		</>
 	)
 }

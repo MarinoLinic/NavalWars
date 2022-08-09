@@ -45,7 +45,7 @@ const Navigation = () => {
 					{[
 						['News', '/klemsen'],
 						['Rankings', '/klemsen'],
-						['About', '/klemsen']
+						['About', '/about']
 					].map(([title, url]) => (
 						<div className="mx-5 text-gray-500 hover:text-white">
 							<Link href={url}>{title}</Link>

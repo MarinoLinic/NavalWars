@@ -33,14 +33,15 @@ function Characters() {
 	}
 
 	return (
-		<div className="container mt-16 mb-8 mx-16">
-			<div className="container grid grid-cols-4 gap-4 items-center">
+		<div className="mt-16 mb-8">
+			<div className="grid grid-cols-4 gap-4 items-center mx-32">
 				{characterList.map((item: any) => (
 					<div key={item.id} className="justify-self-center">
 						<div>Character: {item.name}</div>
 						<img src={item.img} alt="Character image" height="100px" width="100px" />
 						<div>Owner: {item.owner}</div>
 						<button
+							className="mx-4"
 							onClick={() => {
 								setEdit(true)
 								setEditKey(item.id)
@@ -48,6 +49,7 @@ function Characters() {
 							Edit
 						</button>
 						<button
+							className="mx-4"
 							onClick={() => {
 								for (let i = 0; i < characterList.length; i++) {
 									if (characterList[i].id == item.id) {
@@ -92,6 +94,7 @@ function Characters() {
 
 			{/* Add a new character */}
 			<button
+				className="mt-4 flex justify-center w-full"
 				onClick={() => {
 					setCharacterCreationIsShown(true)
 					if (characterList.length > MAX_CHARACTERS)
@@ -99,9 +102,9 @@ function Characters() {
 				}}>
 				Add character
 			</button>
-			<div>
+			<div className="mt-4 flex justify-center w-full">
 				{characterCreationIsShown && !edit && characterList.length <= MAX_CHARACTERS && (
-					<div className="margin-test">
+					<div className="flex flex-col items-center">
 						<label>
 							Set character name: ‎
 							<input
@@ -115,12 +118,8 @@ function Characters() {
 						</label>
 
 						<p>Choose character avatar</p>
+						<img className="w-52 h-52" src={characterImgAvatars[numAvatar]} alt="Character avatar"></img>
 						<button onClick={() => avatarScroll(false)}>{'<'}</button>
-						<img
-							src={characterImgAvatars[numAvatar]}
-							alt="Character avatar"
-							height="200px"
-							width="200px"></img>
 						<button onClick={() => avatarScroll(true)}>{'>'}</button>
 
 						<button
@@ -146,9 +145,9 @@ function Characters() {
 					</div>
 				)}
 			</div>
-			<div>
+			<div className="flex justify-center">
 				{characterCreationIsShown && characterList.length > MAX_CHARACTERS && (
-					<p className="red">Character limit reached.</p>
+					<p className="text-red-700">Character limit reached.</p>
 				)}
 			</div>
 		</div>
