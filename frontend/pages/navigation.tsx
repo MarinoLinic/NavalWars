@@ -61,12 +61,17 @@ const Navigation = () => {
 					{user && (
 						<DropdownMenu.Root>
 							<DropdownMenu.Trigger>
-								<button
+								<div
 									className="flex mx-5 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
 									id="profile-menu-button">
 									<span className="sr-only">Open user menu</span>
-									<img className="w-10 h-10 rounded-full" src={profilePicture} alt="User photo" />
-								</button>
+									<img
+										className="w-10 h-10 rounded-full"
+										src={profilePicture}
+										alt="User photo"
+										referrerPolicy="no-referrer"
+									/>
+								</div>
 							</DropdownMenu.Trigger>
 							{/* Portals the content into the body */}
 							<DropdownMenu.Portal>

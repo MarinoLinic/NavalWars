@@ -1,6 +1,5 @@
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useState, useRef } from 'react'
-import { characterImgAvatars } from '../utils/variables/character_avatars'
 
 function Profile() {
 	const { user, error, isLoading } = useUser()
@@ -30,6 +29,7 @@ function Profile() {
 					src={profilePicture}
 					alt={'Profile image'}
 					className="w-36 mb-4 rounded-full ring-8 ring-gray-200"
+					referrerPolicy="no-referrer"
 				/>
 				<h2 className="text-2xl font-bold text-gray-700 mb-4">{profileName}</h2>
 				<p className="text-xl font-semibold text-gray-700 mb-4">E-mail: {user.email}</p>
