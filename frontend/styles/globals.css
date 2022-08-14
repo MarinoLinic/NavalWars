@@ -23,6 +23,11 @@ body {
 		Droid Sans, Helvetica Neue, sans-serif;
 }
 
+/* Inverts the color of the entire website when at 100% */
+body {
+	filter: invert(0%);
+}
+
 /* Scrollbar */
 /* Width */
 ::-webkit-scrollbar {

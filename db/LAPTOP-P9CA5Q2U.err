@@ -95,3 +95,8 @@
 2022-08-13T11:16:54.395555Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe (mysqld 8.0.30) starting as process 6224
 2022-08-13T11:16:54.438942Z 0 [Warning] [MY-013907] [InnoDB] Deprecated configuration parameters innodb_log_file_size and/or innodb_log_files_in_group have been used to compute innodb_redo_log_capacity=100663296. Please use innodb_redo_log_capacity instead.
 2022-08-13T11:16:54.457306Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-08-13T11:16:54.911704Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-08-13T11:16:55.296431Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2022-08-13T11:16:55.297038Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2022-08-13T11:16:55.330547Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Bind-address: '::' port: 33060
+2022-08-13T11:16:55.330676Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqld.exe: ready for connections. Version: '8.0.30'  socket: ''  port: 3306  MySQL Community Server - GPL.
