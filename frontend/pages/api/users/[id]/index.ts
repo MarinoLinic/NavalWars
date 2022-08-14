@@ -1,6 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { PrismaClient, Prisma } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-	console.log(req.query)
-	return res.send(200)
+	const { id } = req.query as any
+	const parsedID = parseInt(id.toString())
+
+	if (isNaN(parsedID)) return res.status(400).end()
+
+	const user = await prisma.user.findUnique({ where: { id: parsedID } })
+
+	return user ? res.send(user) : res.status(404).end()
 }

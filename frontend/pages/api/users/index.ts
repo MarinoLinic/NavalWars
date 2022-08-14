@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
-let user: Prisma.UserCreateInput
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === 'GET') {
@@ -35,5 +34,6 @@ Here's a sample object to test out: (POST -> BODY -> RAW -> JSON dropdown)
 // Here we write down the status codes we should know for REST API requests
 // 200 -
 // 201 - Success
+// 400 -
 // 403 - Forbidden
 // 404 -
