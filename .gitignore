@@ -36,4 +36,3 @@ frontend/*.tsbuildinfo
 
 # db
 db/*
-!db/testing
