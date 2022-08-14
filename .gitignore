@@ -34,13 +34,6 @@ frontend/.vercel
 # typescript
 frontend/*.tsbuildinfo
 
-# # db
-# db/performance_schema*/
-# db/sys*/
-# db/LAPTOP*
-# db/#innodb_redo
-# db/mysql_upgrade_info
-# db/mysql/general_log*
-# db/mysql/slow_log*
-# db/#ib*
-# db/undo*
+# db
+db/*
+!db/testing
