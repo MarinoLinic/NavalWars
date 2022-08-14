@@ -50,3 +50,4 @@ OPTIONAL
 - GitLens
 - Simple React Snippets
 - Tabnine AI Autocomplete
+- Auto Rename Tag
