@@ -8,8 +8,24 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @db.VarChar(255)
-  password String @db.VarChar(255)
-  name String @db.VarChar(255)
+  id        Int         @id @default(autoincrement())
+  username  String      @db.VarChar(50)
+  email     String      @db.VarChar(50)
+  password  String      @db.VarChar(255)
+  Character Character[] // ? means optional | [] means "one to many" relation
+}
+
+model Character {
+  id     Int    @id
+  userId Int    @unique
+  name   String @db.VarChar(50)
+  avatar String @db.VarChar(255)
+  // characterType CharacterType @default(Roman)
+  User   User   @relation(fields: [userId], references: [id]) // foreign key referencing User.id
+}
+
+enum CharacterType {
+  Roman
+  Viking
+  Slav
 }

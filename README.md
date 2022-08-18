@@ -4,6 +4,22 @@
 
 Go into the frontend folder, run `npm i` and then `npm run dev`.
 
+## To Do
+
+Project
+
+- Create user upon first login
+
+Cornelius
+
+Marino
+
+- learn difference between async and await
+- learn promises
+- learn all React hooks
+- learn how to make a custom hook
+- watch UI tutorial
+
 ## Project Information
 
 ### Dependencies in the Frontend Folder
@@ -16,7 +32,10 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
   - `npx prisma`
   - `npx prisma generate`
   - `npx prisma db pull`
-  - `npx prisma migrate dev` or `npx prisma migrate` when not in development mode
+  - `npx prisma db push` or ↓ (DB push doesn't have history)
+  - `npx prisma migrate dev --name newMigration` or `npx prisma migrate` when not in development mode
+  - `npx prisma format`
+  - `npx prisma studio`
 - Tailwind CSS
   - `npm install tailwindcss`
   - `npm install postcss`
