@@ -8,6 +8,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 Project
 
+- Implement cookie sessions
 - Create user upon first login
 
 Cornelius

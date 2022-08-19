@@ -16,8 +16,8 @@ model User {
 }
 
 model Character {
-  id     Int    @id
-  userId Int    @unique
+  id     Int    @id @default(autoincrement())
+  userId Int
   name   String @db.VarChar(50)
   avatar String @db.VarChar(255)
   // characterType CharacterType @default(Roman)

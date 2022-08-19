@@ -1,6 +1,7 @@
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
 import { useState, useRef } from 'react'
-import { characterImgAvatars } from '../utils/variables/character_avatars'
+import { Character } from '../components/character'
+import { characterImgAvatars } from '../utils/variables/Avatar'
 import { MAX_CHARACTERS } from '../utils/variables/global'
 
 function Characters() {

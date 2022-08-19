@@ -2,18 +2,9 @@ import data from '../components/data.json'
 import * as React from 'react'
 import { useState } from 'react'
 import { Prisma, PrismaClient } from '@prisma/client'
+import { User } from '../components/user'
 
 let prisma = new PrismaClient()
-
-const create = async () => {
-	fetch('http://localhost:3000/api/users/create', {
-		body: JSON.stringify(data),
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	})
-}
 
 export const getServerSideProps = async () => {
 	const users = await prisma.user.findMany()
@@ -36,7 +27,7 @@ function Cornelius() {
 				{klemens}
 			</div>
 			<div>
-				<button onClick={() => create()}>Create user</button>
+				<button onClick={() => new User('klesmoid')}>Create user</button>
 			</div>
 		</>
 	)

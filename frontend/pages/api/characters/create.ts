@@ -5,13 +5,13 @@ let prisma = new PrismaClient()
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
 	try {
-		const { username, email, password } = req.body
-		await prisma.user.create({
+		const { userId, name, avatar } = req.body
+		await prisma.character.create({
 			data: {
 				// data coming from request
-				username,
-				email,
-				password
+				userId,
+				name,
+				avatar
 			}
 		})
 

@@ -1,4 +1,4 @@
-export const characterImgAvatars = [
+export enum Avatar {
 	'/avatars/1.png',
 	'/avatars/2.png',
 	'/avatars/3.png',
@@ -49,4 +49,4 @@ export const characterImgAvatars = [
 	'/avatars/48.png',
 	'/avatars/49.png',
 	'/avatars/50.png'
-]
+}
