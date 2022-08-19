@@ -1,6 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Navigation from './navigation'
+import Navigation from '../components/navigation'
 import { UserProvider } from '@auth0/nextjs-auth0'
 
 function MyApp({ Component, pageProps }: AppProps) {
