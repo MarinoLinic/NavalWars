@@ -6,14 +6,17 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ## To Do
 
-Project
+##### Project
 
 - Implement cookie sessions
 - Create user upon first login
+- Clean up and make components modular
 
-Cornelius
+##### Cornelius
 
-Marino
+- Nothing yet
+
+##### Marino
 
 - learn difference between async and await
 - learn promises
@@ -38,9 +41,10 @@ Marino
   - `npx prisma format`
   - `npx prisma studio`
 - Tailwind CSS
-  - `npm install tailwindcss`
-  - `npm install postcss`
-  - `npm install autoprefixer`
+  - `npm i tailwindcss postcss autoprefixer` or
+    - `npm install tailwindcss`
+    - `npm install postcss`
+    - `npm install autoprefixer`
   - `npx tailwindcss init -p`
 - Auth0
   - `npm install @auth0/nextjs-auth0`
@@ -59,13 +63,13 @@ Marino
 
 ### Recommended VS Code extensions
 
-NECESSARY
+##### NECESSARY
 
 - Prettier
 - Prisma (syntax highlighting)
 - Tailwind CSS IntelliSense
 
-OPTIONAL
+##### OPTIONAL
 
 - GitLens
 - Simple React Snippets
