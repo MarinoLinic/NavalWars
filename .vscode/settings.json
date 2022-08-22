@@ -1,0 +1,9 @@
+{
+  "dimmer.enabled": true,
+  "dimmer.opacity": 73,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#01121f77",
+    "titleBar.activeBackground": "#102b4077",
+    "titleBar.activeForeground": "#FCF9FA"
+  }
+}
