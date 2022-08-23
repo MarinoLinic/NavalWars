@@ -3,36 +3,33 @@ import { Avatar } from "../utils/variables/Avatar";
 import { Character } from "./character";
 
 export class User {
-    getId() : number {
-        if (this.id == null) {
-            this.FetchID();
-            throw 'ID is unidentified; fetching from database';
-        }
-        else return this.id;
-    }
+  getId(): number {
+    if (this.id == null) {
+      this.FetchID();
+      throw "ID is unidentified; fetching from database";
+    } else return this.id;
+  }
 
-    constructor(username: string) {
-        this.username = username;
+  constructor(username: string) {
+    this.username = username;
 
-        http_fetch.post('users/create', {
-            username: this.username,
-	        email: "testingemail@example.com",
-	        password: "testingpassword",
-        })
+    http_fetch.post("users/create", {
+      username: this.username,
+      email: "testingemail@example.com",
+      password: "testingpassword",
+    });
 
-        this.FetchID();
-    }
-    
-    private id : number | undefined;
-    private username: string;
+    this.FetchID();
+  }
 
-    private characters: Array<Character> = new Array<Character>;
+  private id: number | undefined | null;
+  private username: string;
 
-    addCharacter(name: string, avatar: Avatar, id: number) {
-        this.characters.push(new Character(name, avatar, id))
-    }
+  private characters: Array<Character> = new Array<Character>();
 
-    private async FetchID() {
+  addCharacter(name: string, avatar: Avatar, id: number) {
+    this.characters.push(new Character(name, avatar, id));
+  }
 
-    }
+  private async FetchID() {}
 }
