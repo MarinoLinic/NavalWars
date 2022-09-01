@@ -46,6 +46,9 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
     - `npm install postcss`
     - `npm install autoprefixer`
   - `npx tailwindcss init -p`
+- Next Auth
+  - `npm install next-auth`
+  - `npm install @next-auth/prisma-adapter`
 - Auth0
   - `npm install @auth0/nextjs-auth0`
 - Radix UI
@@ -55,7 +58,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ### External Programs
 
-- HeidiSQL (client)
+- HeidiSQL (client) | (or Prisma Studio)
 - MySQL (server only)
 - Postman (REST API)
   - `http://localhost:3000/api/`
@@ -75,3 +78,13 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 - Simple React Snippets
 - Tabnine AI Autocomplete
 - Auto Rename Tag
+
+### Additional Helpful Snippets
+
+##### HTTP Status Code Responses
+
+- 200 - OK
+- 201 - Created success
+- 400 - Bad Request
+- 403 - Forbidden
+- 404 - Not Found

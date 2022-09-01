@@ -1,15 +1,15 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import Navigation from '../components/navigation'
-import { UserProvider } from '@auth0/nextjs-auth0'
+import { SessionProvider } from "next-auth/react";
+import type { AppProps } from "next/app";
+import Navigation from "../components/navigation";
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }: AppProps) {
-	return (
-		<UserProvider>
-			<Navigation />
-			<Component {...pageProps} />
-		</UserProvider>
-	)
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+  return (
+    <SessionProvider session={session}>
+      <Navigation />
+      <Component {...pageProps} />
+    </SessionProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

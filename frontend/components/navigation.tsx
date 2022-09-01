@@ -1,16 +1,13 @@
 import Link from "next/link";
-import { useUser } from "@auth0/nextjs-auth0";
+import { useSession } from "next-auth/react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 const Navigation = () => {
-  const { user, error, isLoading } = useUser();
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
+  const session = useSession();
 
   // Variables
   // DOESN'T WORK YET | if the gmail profile picture is not available, use the default; nullish coalescing probably unnecessary
-  let profilePicture = user?.picture || "/sailing_ship.png"; // user?.picture == user && user.picture
+  let profilePicture = session.data?.user?.image || "/sailing_ship.png"; // user?.picture == user && user.picture
 
   return (
     <nav
@@ -61,13 +58,13 @@ const Navigation = () => {
             </div>
           ))}
 
-          {!user && (
+          {session.status !== "authenticated" && (
             <div className="mx-5 text-gray-500 hover:text-white">
-              <Link href="/api/auth/login">Log In</Link>
+              <Link href="/api/auth/signin">Log In</Link>
             </div>
           )}
 
-          {user && (
+          {session.status === "authenticated" && (
             <DropdownMenu.Root>
               <DropdownMenu.Trigger>
                 <div
@@ -101,7 +98,9 @@ const Navigation = () => {
                         alt="User photo"
                       />
                     </DropdownMenu.Item>
-                    <DropdownMenu.Item>{user?.name}</DropdownMenu.Item>
+                    <DropdownMenu.Item>
+                      {session.data?.user?.name}
+                    </DropdownMenu.Item>
                   </DropdownMenu.Group>
                   <DropdownMenu.Group className="flex flex-col">
                     {[
@@ -115,7 +114,7 @@ const Navigation = () => {
                       </Link>
                     ))}
                     <DropdownMenu.Separator className="my-1 border-t-2 border-gray-400" />
-                    <Link href="/api/auth/logout">
+                    <Link href="/api/auth/signout">
                       <DropdownMenu.Item className="block py-2 px-4 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                         Log out
                       </DropdownMenu.Item>
