@@ -99,6 +99,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 - Simple React Snippets
 - Tabnine AI Autocomplete
 - Auto Rename Tag
+- Gruvbox Material Icon Theme
 - Reload
 - Auto Comment Blocks
 - Todo Tree
