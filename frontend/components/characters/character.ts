@@ -1,20 +1,22 @@
 import http_fetch from "../../utils/http_fetch";
-import { Avatar } from "../../utils/variables/Avatar";
 
 export class Character {
-  private name: string;
-  private avatar: Avatar;
-  private user: number;
+  public readonly id: number;
+  public name: string;
+  public avatar: string;
+  public readonly user: string | null | undefined;
 
-  constructor(name: string, avatar: Avatar, user: number) {
+  constructor(id: number, name: string, avatar: string, user: string | null | undefined, send: boolean) {
+    this.id = id;
     this.name = name;
     this.avatar = avatar;
     this.user = user;
 
-    http_fetch.post("characters/create", {
-      username: this.name,
-      email: "testingemail@example.com",
-      password: "testingpassword",
-    });
+    if (send) 
+      http_fetch.post("characters/create", {
+        username: this.name,
+        email: "testingemail@example.com",
+        password: "testingpassword",
+      });
   }
 }

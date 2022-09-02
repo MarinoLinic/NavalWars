@@ -1,6 +1,6 @@
 {
   "singleQuote": true,
-  "printWidth": 120,
+  "printWidth": 160,
   "editor.formatOnSave": true,
   "proseWrap": "always",
   "requireConfig": false,
@@ -9,5 +9,5 @@
   "bracketSpacing": true,
   "semi": true,
   "bracketSameLine": true,
-  "tabWidth": 2
+  "tabWidth": 4
 }

@@ -1,13 +1,13 @@
 // ? means optional | [] means "one to many" relation
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"] // can be removed
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma" // can be removed
 }
 
@@ -48,7 +48,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Character     Character[]
+  character     Character[]
 }
 
 model VerificationToken {
@@ -66,13 +66,7 @@ model Character {
   userId String
   name   String @db.VarChar(50)
   avatar String @db.VarChar(255)
-  // User   User   @relation(fields: [userId], references: [id]) // foreign key referencing User.id
-}
-
-enum CharacterType {
-  Roman
-  Viking
-  Slav
+  User   User   @relation(fields: [userId], references: [email]) // foreign key referencing User.id
 }
 
 // How to reference CharacterType? Probably code below:

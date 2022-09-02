@@ -1,5 +1,4 @@
 import http_fetch from "../utils/http_fetch";
-import { Avatar } from "../utils/variables/Avatar";
 import { Character } from "./characters/character";
 
 export class User {
@@ -27,8 +26,8 @@ export class User {
 
   private characters: Array<Character> = new Array<Character>();
 
-  addCharacter(name: string, avatar: Avatar, id: number) {
-    this.characters.push(new Character(name, avatar, id));
+  addCharacter(name: string, avatar: string, id: number) {
+    this.characters.push(new Character(id, name, avatar, this.username, true)); //name, avatar, id));
   }
 
   private async FetchID() {}
