@@ -20,3 +20,5 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     res.status(400).json({ error });
   }
 }
+
+// user.create differs such that "where:" is unnecessary

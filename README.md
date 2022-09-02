@@ -8,6 +8,9 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ##### Bugs
 
+- Updating user data fails in certain places due to caching (navigation bar, leaving page then coming back to it)
+  - Solution: Something async when loading data
+
 ##### Clean up
 
 - fix: there are duplicate environment variables for the database URL
@@ -36,6 +39,9 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 - learn promises
 - learn all React hooks
 - learn how to make a custom hook
+- learn getStaticProps
+- rewatch SSG/SSR/CSR
+- wtf is slug when talking about APIs
 - watch UI tutorial
 
 ## Project Information

@@ -7,7 +7,7 @@ const Navigation = () => {
 
   // Variables
   // DOESN'T WORK YET | if the gmail profile picture is not available, use the default; nullish coalescing probably unnecessary
-  let profilePicture = session.data?.user?.image || "/sailing_ship.png"; // user?.picture == user && user.picture
+  let profilePicture = session.data?.user?.image || "/sailing_ship.png";
 
   return (
     <nav
