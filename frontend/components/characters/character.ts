@@ -1,5 +1,5 @@
-import http_fetch from "../utils/http_fetch";
-import { Avatar } from "../utils/variables/Avatar";
+import http_fetch from "../../utils/http_fetch";
+import { Avatar } from "../../utils/variables/Avatar";
 
 export class Character {
   private name: string;

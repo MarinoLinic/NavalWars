@@ -30,6 +30,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 ##### Marino
 
 - implement loading screen and handle errors
+- make global Prisma client instead of declaring it every single time
 - difference between getSession() and useSession()
 - figure out next auth and what you did
 - https://next-auth.js.org/getting-started/client

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useSession } from "next-auth/react";
 import http_fetch from "../utils/http_fetch";
-import { Character } from "../components/character";
+import { Character } from "../components/characters/character";
 import { characterImgAvatars } from "../utils/variables/Avatar";
 import { MAX_CHARACTERS } from "../utils/variables/global";
 

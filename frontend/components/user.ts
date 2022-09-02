@@ -1,6 +1,6 @@
 import http_fetch from "../utils/http_fetch";
 import { Avatar } from "../utils/variables/Avatar";
-import { Character } from "./character";
+import { Character } from "./characters/character";
 
 export class User {
   getId(): number {
