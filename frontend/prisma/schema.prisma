@@ -2,11 +2,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"] // can be removed
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  referentialIntegrity = "prisma" // can be removed
 }
 
 // Added code from the documentation
@@ -46,7 +48,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  Character     Character[]
+  // Character     Character[]
 }
 
 model VerificationToken {
@@ -64,7 +66,7 @@ model Character {
   userId String
   name   String @db.VarChar(50)
   avatar String @db.VarChar(255)
-  User   User   @relation(fields: [userId], references: [id]) // foreign key referencing User.id
+  // User   User   @relation(fields: [userId], references: [id]) // foreign key referencing User.id
 }
 
 enum CharacterType {

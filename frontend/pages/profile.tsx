@@ -1,66 +1,82 @@
-import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0'
-import { useState, useRef } from 'react'
+import { useSession } from "next-auth/react";
+import { useState, useRef } from "react";
+import http_fetch from "../utils/http_fetch";
 
 function Profile() {
-	const { user, error, isLoading } = useUser()
-	if (isLoading) return <div>Loading...</div> // Loading screen
-	if (error) return <div>{error.message}</div>
+  const session = useSession();
+  // TODO: Handle loading screen
+  // if (session.status === "loading") console.log("Test");
 
-	// useState hooks
-	const [profileName, setProfileName] = useState(user?.name)
-	const [editProfile, setEditProfile] = useState(false)
+  // useState hooks
+  const [profileName, setProfileName] = useState(session.data?.user?.name);
+  const [editProfile, setEditProfile] = useState(false);
 
-	const inputRef = useRef(null) as any
+  const inputRef = useRef(null) as any;
 
-	// Variables
-	// DOESN'T WORK YET | if the gmail profile picture is not available, use the default; nullish coalescing probably unnecessary
-	let profilePicture = user?.picture || '/sailing_ship.png' // user?.picture == user && user.picture
+  let profilePicture = session.data?.user?.image || "/sailing_ship.png";
 
-	function setName(funct: Function, value: any) {
-		funct(value)
-		inputRef.current.value = '' // returning the text inside input field to empty
-	}
+  function setName(funct: Function, value: string) {
+    funct(value);
+    inputRef.current.value = ""; // returning the text inside input field to empty
+  }
 
-	return (
-		/* User profile */
-		user && ( // if the left conditional is true, do right
-			<div className="flex flex-col items-center my-16">
-				<img
-					src={profilePicture}
-					alt={'Profile image'}
-					className="w-36 mb-4 rounded-full ring-8 ring-gray-200"
-					referrerPolicy="no-referrer"
-				/>
-				<h2 className="text-2xl font-bold text-gray-700 mb-4">{profileName}</h2>
-				<p className="text-xl font-semibold text-gray-700 mb-4">E-mail: {user.email}</p>
-				<button className="mb-4" onClick={() => setEditProfile(true)}>
-					Edit profile
-				</button>
-				{editProfile && (
-					<>
-						<label>
-							Change name: ‎
-							<input
-								ref={inputRef}
-								type="text"
-								id="user-name"
-								name="User name"
-								autoComplete="off"
-								placeholder="Write here..."
-							/>
-						</label>
-						<button
-							onClick={() => {
-								setName(setProfileName, inputRef.current.value)
-								setEditProfile(false)
-							}}>
-							Confirm
-						</button>
-					</>
-				)}
-			</div>
-		)
-	)
+  return (
+    /* User profile */
+    session.status === "authenticated" && (
+      <div className="flex flex-col items-center my-16">
+        <img
+          src={profilePicture}
+          alt={"Profile image"}
+          className="w-36 mb-4 rounded-full ring-8 ring-gray-200"
+          referrerPolicy="no-referrer"
+        />
+
+        <h2 className="text-2xl font-bold text-gray-700 mb-4">
+          {
+            /* if the frontend variable is empty after reload, fetch from db */
+            profileName || session.data?.user?.name
+          }
+        </h2>
+
+        <p className="text-xl font-semibold text-gray-700 mb-4">
+          E-mail: {session.data?.user?.email}
+        </p>
+
+        <button className="mb-4" onClick={() => setEditProfile(true)}>
+          Edit profile
+        </button>
+
+        {editProfile && (
+          <>
+            <label>
+              Change name:
+              <input
+                ref={inputRef}
+                type="text"
+                id="user-name"
+                name="User name"
+                autoComplete="off"
+                placeholder="Write here..."
+              />
+            </label>
+
+            <button
+              onClick={() => {
+                http_fetch.post("users/changeName", {
+                  name: inputRef.current.value,
+                  email: session.data?.user?.email,
+                });
+                setName(setProfileName, inputRef.current.value);
+                setEditProfile(false);
+              }}
+            >
+              Confirm
+            </button>
+          </>
+        )}
+      </div>
+    )
+  );
 }
 
-export default withPageAuthRequired(Profile as any)
+export default Profile;

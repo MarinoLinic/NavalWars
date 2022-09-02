@@ -6,11 +6,19 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ## To Do
 
+##### Bugs
+
+##### Clean up
+
+- fix: there are duplicate environment variables for the database URL
+
 ##### Project
 
-- Implement cookie sessions
-- Create user upon first login
+- ~~Implement cookie sessions~~
+- ~~Create user upon first login~~
 - Clean up and make components modular
+- Protect pages when user isn't logged in
+- Add ability to change profile picture
 
 ##### Cornelius
 
@@ -18,6 +26,12 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ##### Marino
 
+- implement loading screen and handle errors
+- difference between getSession() and useSession()
+- figure out next auth and what you did
+- https://next-auth.js.org/getting-started/client
+- figure out OAuth2
+- what exactly is "npx prisma generate"?
 - learn difference between async and await
 - learn promises
 - learn all React hooks
@@ -34,7 +48,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 - Prisma
   - `npm install prisma --save-dev`
   - `npx prisma`
-  - `npx prisma generate`
+  - `npx prisma generate` (you should run this after migrations, idk why yet)
   - `npx prisma db pull`
   - `npx prisma db push` or ↓ (DB push doesn't have history)
   - `npx prisma migrate dev --name newMigration` or `npx prisma migrate` when not in development mode
@@ -78,6 +92,9 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 - Simple React Snippets
 - Tabnine AI Autocomplete
 - Auto Rename Tag
+- Reload
+- Auto Comment Blocks
+- Todo Tree
 
 ### Additional Helpful Snippets
 
