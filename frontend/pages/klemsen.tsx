@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { Prisma, PrismaClient } from "@prisma/client";
-
-let prisma = new PrismaClient();
+import { prisma } from "../prisma";
 
 /* 
 export const getServerSideProps = async () => {

@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../../prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-
-let prisma = new PrismaClient();
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   try {

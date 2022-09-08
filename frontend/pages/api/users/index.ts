@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../../../prisma";
 import { NextApiRequest, NextApiResponse } from "next";
-
-const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,14 +9,6 @@ export default async function handler(
     const users = await prisma.user.findMany();
     return res.send(users);
   } else if (req.method === "POST") {
-    // const result = await prisma.user.create({
-    // 	data: {
-    // 		...req.body
-    // 	}
-    // })
-    // res.json(result)
-
-    //const { body: data } = req
     const data = req.body;
     const newUser = await prisma.user.create({ data });
     // We're missing server-side validation
@@ -26,11 +16,12 @@ export default async function handler(
   }
 }
 
-/* 
-Here's a sample object to test out: (POST -> BODY -> RAW -> JSON dropdown)
-{
-    "email": "test@example.com",
-    "password": "testpass234",
-    "name": "Test User"
-}
-*/
+// == another way to write body: ==
+// const result = await prisma.user.create({
+// 	data: {
+// 		...req.body
+// 	}
+// })
+// res.json(result)
+
+//const { body: data } = req
