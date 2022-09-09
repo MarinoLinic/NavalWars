@@ -5,10 +5,11 @@ import { Character } from "../components/characters/character";
 import { characterImgAvatars } from "../utils/variables/Avatar";
 import { MAX_CHARACTERS } from "../utils/variables/global";
 import ListAllCharacters from "../components/characters/ListAllCharacters";
+import { prisma } from "../prisma";
 
-function Characters() {
-  const session = useSession();
+const session = useSession();
 
+function Characters({ associatedCharacters }: any) {
   // useState hooks
   const [characterCreationIsShown, setCharacterCreationIsShown] =
     useState(false);
@@ -35,8 +36,11 @@ function Characters() {
       setNumAvatar(characterImgAvatars.length - 1);
   }
 
+  console.log(associatedCharacters);
+
   return ListAllCharacters(characterList);
 }
+
 // return (
 //   <div className="mt-16 mb-8">
 //     <div className="grid grid-cols-4 gap-4 items-center mx-32">
@@ -181,3 +185,35 @@ function Characters() {
 // );
 
 export default Characters;
+
+export async function getStaticProps() {
+  // const res = await fetch('api/characters/get_user_characters')
+  // const posts = await res.json()
+
+  // await fetch("http://localhost:3000/api/" + "characters/get_user_characters", {
+  //     body: JSON.stringify({email: session.data?.user?.email,}),
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+
+  // associatedCharacters = http_fetch.post("characters/get_user_characters", {
+  //   email: session.data?.user?.email,
+  // });
+
+  const res = await fetch(
+    "http://localhost:3000/api/users/cl7j47zjl0006iktja2lfbh80"
+  );
+  const associatedCharacters = await res.json();
+
+  return {
+    props: {
+      associatedCharacters,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+
+    // + ↓ At most once every 60 seconds
+    revalidate: 5, // if we want incremental static generation every 60 sec
+  };
+}
