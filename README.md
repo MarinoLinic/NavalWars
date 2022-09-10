@@ -14,6 +14,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 ##### Clean up
 
 - fix: there are duplicate environment variables for the database URL
+- should I add ID or email as userID?
 
 ##### Project
 

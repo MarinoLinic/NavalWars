@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import http_fetch from "../utils/http_fetch";
 import { Character } from "../components/characters/character";
 import { characterImgAvatars } from "../utils/variables/Avatar";
@@ -7,9 +7,9 @@ import { MAX_CHARACTERS } from "../utils/variables/global";
 import ListAllCharacters from "../components/characters/ListAllCharacters";
 import { prisma } from "../prisma";
 
-const session = useSession();
-
 function Characters({ associatedCharacters }: any) {
+  const session = useSession();
+
   // useState hooks
   const [characterCreationIsShown, setCharacterCreationIsShown] =
     useState(false);
@@ -23,23 +23,25 @@ function Characters({ associatedCharacters }: any) {
   );
   const [editKey, setEditKey] = useState(); // used for determining which character to manipulate when pressing button
 
-  // Switch between available character avatars
-  function avatarScroll(characterAvatarForward: boolean) {
-    if (characterAvatarForward && numAvatar < characterImgAvatars.length - 1)
-      setNumAvatar(numAvatar + 1);
-    else if (!characterAvatarForward && numAvatar > 0)
-      setNumAvatar(numAvatar - 1);
-
-    if (characterAvatarForward && numAvatar === characterImgAvatars.length - 1)
-      setNumAvatar(0);
-    else if (!characterAvatarForward && numAvatar === 0)
-      setNumAvatar(characterImgAvatars.length - 1);
-  }
-
   console.log(associatedCharacters);
 
-  return ListAllCharacters(characterList);
+  // return ListAllCharacters(characterList);
+
+  return <p>I am test {session.data?.user?.email}</p>;
 }
+
+// // Switch between available character avatars
+// function avatarScroll(characterAvatarForward: boolean) {
+//   if (characterAvatarForward && numAvatar < characterImgAvatars.length - 1)
+//     setNumAvatar(numAvatar + 1);
+//   else if (!characterAvatarForward && numAvatar > 0)
+//     setNumAvatar(numAvatar - 1);
+
+//   if (characterAvatarForward && numAvatar === characterImgAvatars.length - 1)
+//     setNumAvatar(0);
+//   else if (!characterAvatarForward && numAvatar === 0)
+//     setNumAvatar(characterImgAvatars.length - 1);
+// }
 
 // return (
 //   <div className="mt-16 mb-8">
@@ -184,36 +186,20 @@ function Characters({ associatedCharacters }: any) {
 //   </div>
 // );
 
-export default Characters;
+export async function getServerSideProps(context: any) {
+  const session = await getSession(context);
 
-export async function getStaticProps() {
-  // const res = await fetch('api/characters/get_user_characters')
-  // const posts = await res.json()
-
-  // await fetch("http://localhost:3000/api/" + "characters/get_user_characters", {
-  //     body: JSON.stringify({email: session.data?.user?.email,}),
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-
-  // associatedCharacters = http_fetch.post("characters/get_user_characters", {
-  //   email: session.data?.user?.email,
-  // });
-
-  const res = await fetch(
-    "http://localhost:3000/api/users/cl7j47zjl0006iktja2lfbh80"
-  );
-  const associatedCharacters = await res.json();
+  const associatedCharacters = await prisma.character.findMany({
+    where: {
+      userEmail: session?.user?.email as any,
+    },
+  });
 
   return {
     props: {
       associatedCharacters,
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-
-    // + ↓ At most once every 60 seconds
-    revalidate: 5, // if we want incremental static generation every 60 sec
   };
 }
+
+export default Characters;

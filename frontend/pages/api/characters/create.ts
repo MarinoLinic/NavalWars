@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { userId, name, avatar } = req.body;
+    const { userEmail, name, avatar } = req.body;
     await prisma.character.create({
       data: {
-        userId,
+        userEmail,
         name,
         avatar,
       },

@@ -5,10 +5,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { userId } = req.body;
+  const { email } = req.body.email;
   const characters = await prisma.character.findMany({
     where: {
-      userId: userId,
+      userEmail: email,
     },
   });
   return res.send(characters);

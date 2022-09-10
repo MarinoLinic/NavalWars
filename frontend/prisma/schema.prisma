@@ -1,17 +1,13 @@
-// ? means optional | [] means "one to many" relation
-
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider             = "mysql"
-  url                  = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
-// Added code from the documentation
-
-model Account {
+model Account { // NextAuth
   id                String  @id @default(cuid())
   userId            String
   type              String
@@ -30,12 +26,20 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Session {
+model Session { // NextAuth
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken { // NextAuth
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model User {
@@ -49,23 +53,15 @@ model User {
   characters    Character[]
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
-//
-
 model Character {
-  id     Int    @id @default(autoincrement())
-  userId String
-  name   String @db.VarChar(50)
-  avatar String @db.VarChar(255)
-  user   User   @relation(fields: [userId], references: [email]) // foreign key referencing User.id
+  id        Int    @id @default(autoincrement())
+  userEmail String
+  name      String @db.VarChar(50)
+  avatar    String @db.VarChar(255)
+  user      User   @relation(fields: [userEmail], references: [email]) // foreign key referencing User.id
 }
+
+// ? means optional | [] means "one to many" relation
 
 // How to reference CharacterType? Probably code below:
 // characterType CharacterType @default(Roman)
