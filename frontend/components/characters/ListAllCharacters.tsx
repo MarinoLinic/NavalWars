@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { Character } from "./character";
 import Characters from "../../pages/characters";
 
-export default function ListAllCharacters(characters: Character[]) {
+export default function ListAllCharacters({ characters }) {
   return (
     <div className="grid grid-cols-4 gap-4 items-center mx-32">
       {characters.map((character) => formatCharacter(character))}

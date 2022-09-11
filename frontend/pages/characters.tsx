@@ -27,7 +27,12 @@ function Characters({ associatedCharacters }: any) {
 
   // return ListAllCharacters(characterList);
 
-  return <p>I am test {session.data?.user?.email}</p>;
+  return (
+    <>
+      <p>I am test {session.data?.user?.email}</p>;
+      <ListAllCharacters characters={associatedCharacters} />
+    </>
+  );
 }
 
 // // Switch between available character avatars
