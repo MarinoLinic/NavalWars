@@ -13,8 +13,8 @@ export default function ListAllCharacters({ characters }: any) {
   const [editTrue, setEditTrue] = useState({ edit: false, id: "1" });
 
   const router = useRouter();
-  function refreshData() {
-    router.replace(router.asPath);
+  function refreshData(hardRefresh: boolean) {
+    hardRefresh ? router.reload() : router.replace(router.asPath);
   }
 
   return (
@@ -34,13 +34,17 @@ function formatCharacter(
 ) {
   return (
     <div key={character.id} className="justify-self-center">
-      {characterInfo(character, setEditTrue)}
+      {characterInfo(character, setEditTrue, refreshData)}
       {characterEdit(character, editTrue, refreshData)}
     </div>
   );
 }
 
-function characterInfo(character: Character, setEditTrue: Function) {
+function characterInfo(
+  character: Character,
+  setEditTrue: Function,
+  refreshData: Function
+) {
   return (
     <>
       <div>Character: {character.name}</div>
@@ -62,7 +66,8 @@ function characterInfo(character: Character, setEditTrue: Function) {
       <button
         className="mx-4"
         onClick={() => {
-          //TODO: Implement delete button
+          http_fetch.delete("characters/delete", { id: character.id });
+          refreshData(true);
         }}
       >
         Delete

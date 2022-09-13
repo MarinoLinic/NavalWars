@@ -78,6 +78,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
   - `npm install prisma --save-dev`
   - `npx prisma`
   - `npx prisma generate` (you should run this after migrations, idk why yet)
+  - `npx prisma db seed` (we added this)
   - `npx prisma db pull`
   - `npx prisma db push` or ↓ (DB push doesn't have history)
   - `npx prisma migrate dev --name newMigration` or `npx prisma migrate` when not in development mode

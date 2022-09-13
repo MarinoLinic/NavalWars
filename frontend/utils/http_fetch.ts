@@ -27,6 +27,16 @@ const http_fetch: any = {
       },
     });
   },
+
+  delete: async function (address: string, data: any) {
+    fetch("http://localhost:3000/api/" + address, {
+      body: JSON.stringify(data),
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
 };
 
 export default http_fetch;
