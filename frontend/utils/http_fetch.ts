@@ -1,4 +1,13 @@
 const http_fetch: any = {
+  get: async function (address: string) {
+    let data = fetch("http://localhost:3000/api/" + address, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
+
   post: async function (address: string, data: any) {
     fetch("http://localhost:3000/api/" + address, {
       body: JSON.stringify(data),
@@ -9,9 +18,10 @@ const http_fetch: any = {
     });
   },
 
-  get: async function (address: string) {
-    let data = fetch("http://localhost:3000/api/" + address, {
-      method: "GET",
+  put: async function (address: string, data: any) {
+    fetch("http://localhost:3000/api/" + address, {
+      body: JSON.stringify(data),
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

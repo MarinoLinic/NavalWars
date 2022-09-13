@@ -11,6 +11,9 @@
   "prettier": {
     "tabWidth": 2
   },
+  "prisma": {
+    "seed": "ts-node -O {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.4",
     "@prisma/client": "^4.2.1",

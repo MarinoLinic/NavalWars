@@ -4,15 +4,23 @@ import http_fetch from "../../utils/http_fetch";
 import { useSession } from "next-auth/react";
 import { Character } from "./character";
 import Characters from "../../pages/characters";
+import { readFileSync } from "fs";
+import { useRouter } from "next/router";
 
 // originally: characters: Character[]
 export default function ListAllCharacters({ characters }: any) {
   // console.log(characters);
   const [editTrue, setEditTrue] = useState({ edit: false, id: "1" });
+
+  const router = useRouter();
+  function refreshData() {
+    router.replace(router.asPath);
+  }
+
   return (
     <div className="grid grid-cols-4 gap-4 items-center mx-32">
       {characters.map((character: Character) =>
-        formatCharacter(character, editTrue, setEditTrue)
+        formatCharacter(character, editTrue, setEditTrue, refreshData)
       )}
     </div>
   );
@@ -21,12 +29,13 @@ export default function ListAllCharacters({ characters }: any) {
 function formatCharacter(
   character: Character,
   editTrue: object,
-  setEditTrue: Function
+  setEditTrue: Function,
+  refreshData: Function
 ) {
   return (
     <div key={character.id} className="justify-self-center">
       {characterInfo(character, setEditTrue)}
-      {characterEdit(character, editTrue)}
+      {characterEdit(character, editTrue, refreshData)}
     </div>
   );
 }
@@ -63,7 +72,12 @@ function characterInfo(character: Character, setEditTrue: Function) {
 }
 
 // TODO: figure out editTrue type
-function characterEdit(character: Character, editTrue: any) {
+function characterEdit(
+  character: Character,
+  editTrue: any,
+  refreshData: Function
+) {
+  const [characterNameChange, setCharacterNameChange] = useState("");
   return (
     <div>
       {editTrue.edit && editTrue.id === character.id && (
@@ -72,13 +86,19 @@ function characterEdit(character: Character, editTrue: any) {
           <input
             type="text"
             name="Character name"
+            value={characterNameChange}
             autoComplete="off"
-            placeholder="Set character name..."
-            //onChange={(e) => setCharacterName(e.target.value)}
+            placeholder="Set new character name..."
+            onChange={(e) => setCharacterNameChange(e.target.value)}
           />
           <button
             onClick={() => {
-              //TODO: Implement submit button;
+              http_fetch.put("characters/change", {
+                name: characterNameChange,
+                id: character.id,
+              });
+              setCharacterNameChange("");
+              refreshData();
             }}
           >
             Submit
