@@ -10,20 +10,21 @@ import { prisma } from "../prisma";
 function Characters({ associatedCharacters }: any) {
   const session = useSession();
 
-  // useState hooks
-  const [characterCreationIsShown, setCharacterCreationIsShown] =
-    useState(false);
-  const [edit, setEdit] = useState(false);
-  const [characterName, setCharacterName] = useState(
-    session.data?.user?.name + "'s character"
-  );
-  const [characterList, setCharacterList] = useState<Character[]>([]);
-  const [numAvatar, setNumAvatar] = useState(
-    Math.floor(Math.random() * characterImgAvatars.length)
-  );
-  const [editKey, setEditKey] = useState(); // used for determining which character to manipulate when pressing button
+  // // useState hooks
+  // const [characterCreationIsShown, setCharacterCreationIsShown] =
+  //   useState(false);
+  // const [edit, setEdit] = useState(false);
+  // const [characterName, setCharacterName] = useState(
+  //   session.data?.user?.name + "'s character"
+  // );
+  // const [characterList, setCharacterList] = useState<Character[]>([]);
+  // const [numAvatar, setNumAvatar] = useState(
+  //   Math.floor(Math.random() * characterImgAvatars.length)
+  // );
+  // const [editKey, setEditKey] = useState(); // used for determining which character to manipulate when pressing button
 
-  console.log(associatedCharacters);
+  // console.log(associatedCharacters);
+  // console.log(typeof associatedCharacters);
 
   // return ListAllCharacters(characterList);
 

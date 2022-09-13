@@ -1,28 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PrismaClient } from "@prisma/client";
 import http_fetch from "../../utils/http_fetch";
 import { useSession } from "next-auth/react";
 import { Character } from "./character";
 import Characters from "../../pages/characters";
 
-export default function ListAllCharacters({ characters }) {
+// originally: characters: Character[]
+export default function ListAllCharacters({ characters }: any) {
+  // console.log(characters);
+  const [editTrue, setEditTrue] = useState({ edit: false, id: "1" });
   return (
     <div className="grid grid-cols-4 gap-4 items-center mx-32">
-      {characters.map((character) => formatCharacter(character))}
+      {characters.map((character: Character) =>
+        formatCharacter(character, editTrue, setEditTrue)
+      )}
     </div>
   );
 }
 
-function formatCharacter(character: Character) {
+function formatCharacter(
+  character: Character,
+  editTrue: object,
+  setEditTrue: Function
+) {
   return (
     <div key={character.id} className="justify-self-center">
-      {characterInfo(character)}
-      {characterEdit(character)}
+      {characterInfo(character, setEditTrue)}
+      {characterEdit(character, editTrue)}
     </div>
   );
 }
 
-function characterInfo(character: Character) {
+function characterInfo(character: Character, setEditTrue: Function) {
   return (
     <>
       <div>Character: {character.name}</div>
@@ -36,7 +45,7 @@ function characterInfo(character: Character) {
       <button
         className="mx-4"
         onClick={() => {
-          //TODO: Implement edit button
+          setEditTrue({ edit: true, id: character.id });
         }}
       >
         Edit
@@ -53,25 +62,30 @@ function characterInfo(character: Character) {
   );
 }
 
-function characterEdit(character: Character) {
+// TODO: figure out editTrue type
+function characterEdit(character: Character, editTrue: any) {
   return (
-    <label>
-      Set character name:
-      <input
-        type="text"
-        name="Character name"
-        autoComplete="off"
-        placeholder="Set character name..."
-        //onChange={(e) => setCharacterName(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          //TODO: Implement submit button;
-        }}
-      >
-        Submit
-      </button>
-    </label>
+    <div>
+      {editTrue.edit && editTrue.id === character.id && (
+        <label>
+          Set character name:
+          <input
+            type="text"
+            name="Character name"
+            autoComplete="off"
+            placeholder="Set character name..."
+            //onChange={(e) => setCharacterName(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              //TODO: Implement submit button;
+            }}
+          >
+            Submit
+          </button>
+        </label>
+      )}
+    </div>
   );
 }
 
