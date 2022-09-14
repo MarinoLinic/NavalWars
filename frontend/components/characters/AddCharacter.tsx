@@ -25,7 +25,7 @@ export default function AddCharacter({ session }: props) {
 
 function characterCreate(session: any, refreshData: Function) {
   const [characterName, setCharacterName] = useState("");
-  const [characterAvatar, setCharacterAvatar] = useState("/avatars/2.png");
+  const [characterAvatar, setCharacterAvatar] = useState("/avatars/1.png");
   return (
     <>
       <div>

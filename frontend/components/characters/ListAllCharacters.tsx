@@ -7,8 +7,13 @@ interface props {
   characters: Character[];
 }
 
+interface EditTrue {
+  edit: boolean;
+  id?: number;
+}
+
 export default function ListAllCharacters({ characters }: props) {
-  const [editTrue, setEditTrue] = useState({ edit: false, id: "1" });
+  const [editTrue, setEditTrue] = useState({ edit: false, id: 1 });
 
   // TODO: refactorize? we need to either create a custom hook or make a tsx https://reactjs.org/docs/hooks-rules.html
   const router = useRouter();
@@ -18,7 +23,7 @@ export default function ListAllCharacters({ characters }: props) {
 
   return (
     <div className="grid grid-cols-4 gap-4 items-center mx-32">
-      // EXPLORE: Why is it able to map through an object?
+      {/* EXPLORE: Why is it able to map through an object?*/}
       {characters.map((character: Character) =>
         formatCharacter(character, editTrue, setEditTrue, refreshData)
       )}
@@ -28,20 +33,21 @@ export default function ListAllCharacters({ characters }: props) {
 
 function formatCharacter(
   character: Character,
-  editTrue: object,
+  editTrue: EditTrue,
   setEditTrue: Function,
   refreshData: Function
 ) {
   return (
     <div key={character.id} className="justify-self-center">
-      {characterInfo(character, setEditTrue, refreshData)}
-      {characterEdit(character, editTrue, refreshData)}
+      {characterInfo(character, editTrue, setEditTrue, refreshData)}
+      {characterEdit(character, editTrue, setEditTrue, refreshData)}
     </div>
   );
 }
 
 function characterInfo(
   character: Character,
+  editTrue: EditTrue,
   setEditTrue: Function,
   refreshData: Function
 ) {
@@ -57,7 +63,9 @@ function characterInfo(
       <button
         className="mx-4"
         onClick={() => {
-          setEditTrue({ edit: true, id: character.id });
+          editTrue.edit
+            ? setEditTrue({ edit: false })
+            : setEditTrue({ edit: true, id: character.id });
         }}
       >
         Edit
@@ -75,11 +83,10 @@ function characterInfo(
   );
 }
 
-// TODO: remove edit when clicking on button again
-// TODO: figure out editTrue type
 function characterEdit(
   character: Character,
-  editTrue: any,
+  editTrue: EditTrue,
+  setEditTrue: Function,
   refreshData: Function
 ) {
   const [characterNameChange, setCharacterNameChange] = useState("");
@@ -104,6 +111,7 @@ function characterEdit(
               });
               setCharacterNameChange("");
               refreshData();
+              setEditTrue({ edit: false });
             }}
           >
             Submit

@@ -1,1 +1,1 @@
-export const MAX_CHARACTERS = 7 // -1 due to array counting
+export const MAX_CHARACTERS = 12; // -1 due to array counting

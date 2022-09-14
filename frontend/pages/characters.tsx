@@ -4,16 +4,16 @@ import { MAX_CHARACTERS } from "../utils/variables/global";
 import ListAllCharacters from "../components/characters/ListAllCharacters";
 import AddCharacter from "../components/characters/AddCharacter";
 import { prisma } from "../prisma";
-import { useRouter } from "next/router";
+import { Character } from "../components/characters/character";
 
-function Characters({ associatedCharacters }: any) {
-  const router = useRouter();
-  function refreshData(hardRefresh: boolean) {
-    hardRefresh ? router.reload() : router.replace(router.asPath);
-  }
+interface props {
+  associatedCharacters: Array<Character>;
+}
 
+function Characters({ associatedCharacters }: props) {
   const session = useSession();
   const [edit, setEdit] = useState(false);
+  const [limit, setLimit] = useState(false);
 
   return (
     <>
@@ -23,7 +23,13 @@ function Characters({ associatedCharacters }: any) {
         <button
           className="bg-black text-white w-full"
           onClick={() => {
-            edit ? setEdit(false) : setEdit(true);
+            if (associatedCharacters.length < MAX_CHARACTERS)
+              edit ? setEdit(false) : setEdit(true);
+            else {
+              setEdit(false);
+              setLimit(true);
+              setTimeout(() => setLimit(false), 4000); // 4 second timer for warning to disappear
+            }
           }}
         >
           Add a new character
@@ -31,6 +37,14 @@ function Characters({ associatedCharacters }: any) {
 
         <div className="mt-16">
           {edit && <AddCharacter editTrue={edit} session={session} />}
+        </div>
+
+        <div className="flex justify-center">
+          {limit && (
+            <p className="text-red-700">
+              Maximum number of characters reached.
+            </p>
+          )}
         </div>
       </div>
     </>
@@ -42,7 +56,7 @@ export async function getServerSideProps(context: object) {
 
   const associatedCharacters = await prisma.character.findMany({
     where: {
-      userEmail: session?.user?.email as any,
+      userEmail: session?.user?.email as string,
     },
   });
 

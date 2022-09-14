@@ -112,4 +112,4 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ##### GIT
 
-- Remove indexes of cached files in a folder (<db>): `git rm -r --cached db`
+- Remove indexes of cached files in a folder: `git rm -r --cached <folder>`
