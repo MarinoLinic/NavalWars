@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
-import { PrismaClient } from "@prisma/client";
+import { useState } from "react";
 import http_fetch from "../../utils/http_fetch";
-import { useSession } from "next-auth/react";
 import { Character } from "./character";
-import Characters from "../../pages/characters";
-import { readFileSync } from "fs";
 import { useRouter } from "next/router";
 
-// originally: characters: Character[]
-export default function ListAllCharacters({ characters }: any) {
-  // console.log(characters);
+interface props {
+  characters: Character[];
+}
+
+export default function ListAllCharacters({ characters }: props) {
   const [editTrue, setEditTrue] = useState({ edit: false, id: "1" });
 
+  // TODO: refactorize? we need to either create a custom hook or make a tsx https://reactjs.org/docs/hooks-rules.html
   const router = useRouter();
   function refreshData(hardRefresh: boolean) {
     hardRefresh ? router.reload() : router.replace(router.asPath);
@@ -19,6 +18,7 @@ export default function ListAllCharacters({ characters }: any) {
 
   return (
     <div className="grid grid-cols-4 gap-4 items-center mx-32">
+      // EXPLORE: Why is it able to map through an object?
       {characters.map((character: Character) =>
         formatCharacter(character, editTrue, setEditTrue, refreshData)
       )}
@@ -46,7 +46,7 @@ function characterInfo(
   refreshData: Function
 ) {
   return (
-    <>
+    <div className="mt-4">
       <div>Character: {character.name}</div>
       <img
         src={character.avatar}
@@ -54,7 +54,6 @@ function characterInfo(
         height="100px"
         width="100px"
       />
-      <div>Owner: {character.user}</div>
       <button
         className="mx-4"
         onClick={() => {
@@ -72,10 +71,11 @@ function characterInfo(
       >
         Delete
       </button>
-    </>
+    </div>
   );
 }
 
+// TODO: remove edit when clicking on button again
 // TODO: figure out editTrue type
 function characterEdit(
   character: Character,
@@ -113,89 +113,3 @@ function characterEdit(
     </div>
   );
 }
-
-/*function ListAllCharacters(characters: Character[]) {
-  const session = useSession();
-
-  console.log(
-    http_fetch.post("characters/get_user_characters", {
-      userId: session.data?.user?.id,
-    })
-  );
-
-  const [editKey, setEditKey] = useState();
-  const [edit, setEdit] = useState(false);
-
-  return (
-    <div className="grid grid-cols-4 gap-4 items-center mx-32">
-      {characters.map((character: Character) => (
-        <div key={character.id} className="justify-self-center">
-          <div>Character: {character.name}</div>
-          <img
-            src={character.img}
-            alt="Character image"
-            height="100px"
-            width="100px"
-          />
-          <div>Owner: {character.owner}</div>
-          <button
-            className="mx-4"
-            onClick={() => {
-              setEdit(true);
-              setEditKey(character.id);
-            }}
-          >
-            Edit
-          </button>
-          <button
-            className="mx-4"
-            onClick={() => {
-              for (let i = 0; i < characterList.length; i++) {
-                if (characterList[i].id == character.id) {
-                  setCharacterList(
-                    characterList.filter(
-                      (index: any) => index.id != character.id
-                    )
-                  );
-                }
-              }
-            }}
-          >
-            Delete
-          </button>
-
-          {/* Character edit }
-          <div>
-            {edit && editKey === character.id && (
-              <label>
-                Set character name:
-                <input
-                  type="text"
-                  name="Character name"
-                  autoComplete="off"
-                  placeholder="Set character name..."
-                  onChange={(e) => setCharacterName(e.target.value)}
-                />
-                <button
-                  onClick={() => {
-                    if (characterName == "") alert(`Character name is empty.`);
-                    else {
-                      for (let i = 0; i < characterList.length; i++) {
-                        if (characterList[i].id == editKey)
-                          characterList[i].name = characterName;
-                      }
-                      setCharacterName("");
-                      setEdit(false);
-                    }
-                  }}
-                >
-                  Submit
-                </button>
-              </label>
-            )}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}*/

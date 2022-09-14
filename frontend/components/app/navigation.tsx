@@ -53,7 +53,7 @@ const Navigation = () => {
             ["Rankings", "/klemsen"],
             ["About", "/about"],
           ].map(([title, url]) => (
-            <div className="mx-5 text-gray-500 hover:text-white">
+            <div key={title} className="mx-5 text-gray-500 hover:text-white">
               <Link href={url}>{title}</Link>
             </div>
           ))}
@@ -107,7 +107,7 @@ const Navigation = () => {
                       ["Profile", "/profile"],
                       ["Characters", "/characters"],
                     ].map(([title, url]) => (
-                      <Link href={url}>
+                      <Link key={title} href={url}>
                         <DropdownMenu.Item className="block py-2 px-4 text-sm cursor-pointer text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                           {title}
                         </DropdownMenu.Item>

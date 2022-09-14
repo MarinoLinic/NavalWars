@@ -62,7 +62,7 @@ function Profile() {
 
             <button
               onClick={() => {
-                http_fetch.post("users/changeName", {
+                http_fetch.post("users/change_name", {
                   name: inputRef.current.value,
                   email: session.data?.user?.email,
                 });

@@ -4,67 +4,40 @@
 
 Go into the frontend folder, run `npm i` and then `npm run dev`.
 
-## To Do
-
-##### Bugs
-
-- Updating user data fails in certain places due to caching (navigation bar, leaving page then coming back to it)
-  - Solution: Something async when loading data
-
-##### Clean up
-
-- fix: there are duplicate environment variables for the database URL
-- should I add ID or email as userID?
-
-##### Project
+##### Project Main Tasks
 
 - ~~Implement cookie sessions~~
 - ~~Create user upon first login~~
 - Clean up and make components modular
 - Protect pages when user isn't logged in
 - Add ability to change profile picture
-- Finish the character component so that it loads characters from the server
+- ~~Finish the character component so that it loads characters from the server~~
+
+## To Do (Minor)
+
+- Nothing yet
+
+##### Bugs
+
+- Updating user data fails in certain places due to caching (navigation bar, leaving page then coming back to it)
+  - Solution: Something async when loading data
+- Error in connector: Error querying the database: Server error: `ERROR HY000 (1040): Too many connections'
+- error, no secret: https://next-auth.js.org/warnings#no_secret
+
+##### Clean up
+
+- fix: there are duplicate environment variables for the database URL
+- ~~remove db from repo~~
+- 4 indent spaces
 
 ##### Cornelius
 
 - Nothing yet
 
-##### Marino
+##### [Marino](/Marino.md)
 
 - implement loading screen and handle errors
 - make global Prisma client instead of declaring it every single time
-- difference between getSession() and useSession()
-- figure out next auth and what you did
-- https://next-auth.js.org/getting-started/client
-- figure out OAuth2
-- what exactly is "npx prisma generate"?
-- learn difference between async and await
-- learn promises
-- learn await
-- learn async
-- learn all React hooks
-- learn how to make a custom hook
-- learn getStaticProps
-- rewatch SSG/SSR/CSR
-- wtf is slug when talking about APIs
-- watch UI tutorial
-- is the Prisma schema all really necessary for next auth?
-- why should Prisma be installed on the development only?
-- what is the difference between development and real build anyway?
-- prisma.user.create, why does the next thing have to be an object with "data"?
-- learn events
-- learn DOM manipulation
-- relearn destructuring
-- ES6 modules
-- ES7
-- learn Axios
-- Parcel, Webpack, Babel
-- Export and Export default
-- Extending classes and stuff like encapsulation etc OOP relearn
-- learn nested components and children
-- relearn spread operator
-- high order array functions (forEach, map, filter)
-- mounting components, react lifecycle
 - error handling
 
 ## Project Information
@@ -136,3 +109,7 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 - 400 - Bad Request
 - 403 - Forbidden
 - 404 - Not Found
+
+##### GIT
+
+- Remove indexes of cached files in a folder (<db>): `git rm -r --cached db`
