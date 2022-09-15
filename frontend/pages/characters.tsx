@@ -15,6 +15,18 @@ function Characters({ associatedCharacters }: props) {
   const [edit, setEdit] = useState(false);
   const [limit, setLimit] = useState(false);
 
+  if (session.status === "loading") {
+    return (
+      <p className="text-center mt-8 text-red-800 font-bold">Loading...</p>
+    );
+  }
+
+  if (session.status === "unauthenticated") {
+    return (
+      <p className="text-center mt-8 text-red-800 font-bold">Access Denied</p>
+    );
+  }
+
   return (
     <>
       <ListAllCharacters characters={associatedCharacters} />

@@ -30,4 +30,4 @@
 - relearn spread operator
 - high order array functions (forEach, map, filter)
 - mounting components, react lifecycle
-- difference between env and env.local
+- learn about error handling

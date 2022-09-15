@@ -14,7 +14,7 @@ export default function AvatarList({ chosen, chosenFunction }: props) {
           className={`border-8 hover:opacity-90 hover:grayscale-0
           ${
             avatar === chosen
-              ? "border-b-yellow-500"
+              ? "border-b-yellow-500 border-x-gray-300"
               : "border-b-red-700 opacity-50 grayscale"
           }`}
           src={avatar}

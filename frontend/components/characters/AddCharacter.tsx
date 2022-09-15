@@ -10,7 +10,7 @@ interface props {
 
 //TODO: Add limitation for maximum number of characters and try to add it in SQL too
 export default function AddCharacter({ session }: props) {
-  // TODO: make a custom hook for useRouter()
+  // TODO: make a custom hook for useRouter()?
   const router = useRouter();
   function refreshData(hardRefresh: boolean) {
     hardRefresh ? router.reload() : router.replace(router.asPath);
@@ -28,7 +28,7 @@ function characterCreate(session: any, refreshData: Function) {
   const [characterAvatar, setCharacterAvatar] = useState("/avatars/1.png");
   return (
     <>
-      <div>
+      <div className="flex justify-center w-full">
         <label>
           Set character name:
           <input
@@ -41,6 +41,8 @@ function characterCreate(session: any, refreshData: Function) {
           />
           <button
             onClick={() => {
+              // if (characterName === "") alert("Character name is empty!");
+              // else {
               http_fetch.post("characters/create", {
                 userEmail: session?.data?.user?.email,
                 name: characterName,
@@ -48,6 +50,7 @@ function characterCreate(session: any, refreshData: Function) {
               });
               setCharacterName("");
               refreshData(true);
+              // }
             }}
           >
             Submit
@@ -55,10 +58,12 @@ function characterCreate(session: any, refreshData: Function) {
         </label>
       </div>
 
-      <AvatarList
-        chosen={characterAvatar}
-        chosenFunction={setCharacterAvatar}
-      />
+      <div className="flex justify-center">
+        <AvatarList
+          chosen={characterAvatar}
+          chosenFunction={setCharacterAvatar}
+        />
+      </div>
     </>
   );
 }

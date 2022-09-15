@@ -23,7 +23,6 @@ export default function ListAllCharacters({ characters }: props) {
 
   return (
     <div className="grid grid-cols-4 gap-4 items-center mx-32">
-      {/* EXPLORE: Why is it able to map through an object?*/}
       {characters.map((character: Character) =>
         formatCharacter(character, editTrue, setEditTrue, refreshData)
       )}

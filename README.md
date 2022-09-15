@@ -19,8 +19,6 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ##### Bugs
 
-- Updating user data fails in certain places due to caching (navigation bar, leaving page then coming back to it)
-  - Solution: Something async when loading data
 - Error in connector: Error querying the database: Server error: `ERROR HY000 (1040): Too many connections'
 - error, no secret: https://next-auth.js.org/warnings#no_secret
 
@@ -36,9 +34,10 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
 
 ##### [Marino](/Marino.md)
 
+- make a component of red alert div
+- make import statements modular
 - implement loading screen and handle errors
-- make global Prisma client instead of declaring it every single time
-- error handling
+- ~~make global Prisma client instead of declaring it every single time~~
 
 ## Project Information
 

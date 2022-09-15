@@ -4,8 +4,6 @@ import http_fetch from "../utils/http_fetch";
 
 function Profile() {
   const session = useSession();
-  // TODO: Handle loading screen
-  // if (session.status === "loading") console.log("Test");
 
   // useState hooks
   const [profileName, setProfileName] = useState(session.data?.user?.name);
@@ -18,6 +16,18 @@ function Profile() {
   function setName(funct: Function, value: string) {
     funct(value);
     inputRef.current.value = ""; // returning the text inside input field to empty
+  }
+
+  if (session.status === "loading") {
+    return (
+      <p className="text-center mt-8 text-red-800 font-bold">Loading...</p>
+    );
+  }
+
+  if (session.status === "unauthenticated") {
+    return (
+      <p className="text-center mt-8 text-red-800 font-bold">Access Denied</p>
+    );
   }
 
   return (
