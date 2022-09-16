@@ -62,7 +62,7 @@ model Character {
   Buildings          Buildings?
   Tasks_Construction Task_Construction[]
   Tasks_Naval        Task_Naval[]
-  Armada             Armada[]
+  Armada             Armada?
   ShipGroup          ShipGroup[]
 }
 
