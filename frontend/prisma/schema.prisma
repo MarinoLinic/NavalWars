@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account { // NextAuth
+model Account {
   id                String  @id @default(cuid())
   userId            String
   type              String
@@ -26,7 +26,7 @@ model Account { // NextAuth
   @@unique([provider, providerAccountId])
 }
 
-model Session { // NextAuth
+model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
   userId       String
@@ -34,7 +34,7 @@ model Session { // NextAuth
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model VerificationToken { // NextAuth
+model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
@@ -54,11 +54,67 @@ model User {
 }
 
 model Character {
-  id        Int    @id @default(autoincrement())
-  userEmail String
-  name      String @db.VarChar(50)
-  avatar    String @db.VarChar(255)
-  user      User   @relation(fields: [userEmail], references: [email]) // foreign key referencing User.id
+  id                 Int                 @id @default(autoincrement())
+  userEmail          String?
+  name               String              @db.VarChar(50)
+  avatar             String              @db.VarChar(255)
+  User               User?               @relation(fields: [userEmail], references: [email]) // foreign key referencing User.id
+  Buildings          Buildings?
+  Tasks_Construction Task_Construction[]
+  Tasks_Naval        Task_Naval[]
+  Armada             Armada?
+  ShipGroup          ShipGroup[]
+}
+
+model Buildings {
+  characterID Int       @id
+  building0   Int
+  Character   Character @relation(fields: [characterID], references: [id])
+}
+
+model Armada {
+  characterID Int       @id
+  shipGroupID Int       @unique
+  ShipGroup   ShipGroup @relation(fields: [shipGroupID], references: [id])
+  Character   Character @relation(fields: [characterID], references: [id])
+}
+
+model ShipGroup {
+  id          Int          @id @default(autoincrement())
+  characterID Int
+  ship0       Int
+  Tasks_Naval Task_Naval[]
+  Armada      Armada?
+  Character   Character    @relation(fields: [characterID], references: [id])
+}
+
+model Task_Construction {
+  id           Int              @id
+  completed    DateTime
+  characterID  Int
+  buildingtype ConstructionType
+  Character    Character        @relation(fields: [characterID], references: [id])
+}
+
+model Task_Naval {
+  id          Int         @id
+  completed   DateTime
+  characterID Int
+  destination Int
+  missionType MissionType
+  ShipGroup   ShipGroup   @relation(fields: [id], references: [id])
+  Character   Character   @relation(fields: [characterID], references: [id])
+}
+
+enum ConstructionType {
+  Ship
+  Building
+}
+
+enum MissionType {
+  Attack
+  Protect
+  Scout
 }
 
 // ? means optional | [] means "one to many" relation

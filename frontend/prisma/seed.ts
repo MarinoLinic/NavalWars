@@ -7,11 +7,29 @@ export const main = async () => {
       userEmail: "dev.navalwars@gmail.com",
       name: "Test Character",
       avatar: "/avatars/1.png",
-    },
-  });
+    }
+  })
+  const newBuildings = await prisma.buildings.create({
+    data: {
+      characterID: newCharacter.id,
+      building0: 2
+    }
+  })
+  const newShipGroup = await prisma.shipGroup.create({
+    data: {
+      characterID: newCharacter.id,
+      ship0: 3
+    }
+  })
+  const newArmada = await prisma.armada.create({
+    data: {
+      characterID: newCharacter.id,
+      shipGroupID: newShipGroup.id
+    }
+  })
 };
 
-for (let i = 0; i < 5; i++) main(); // 5 seeds
+for (let i = 0; i < 3; i++) main(); // 3 seeds
 
 // Install ts-node: npm i -D ts-node
 
