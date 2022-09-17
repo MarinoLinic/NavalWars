@@ -32,3 +32,4 @@
 - make import statements modular
 - implement loading screen and handle errors
 - ~~make global Prisma client instead of declaring it every single time~~
+- format function args on same line
