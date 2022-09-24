@@ -34,6 +34,8 @@ Go into the frontend folder, run `npm i` and then `npm run dev`.
   - `npm install @auth0/nextjs-auth0`
 - Radix UI
   - `npm install @radix-ui/react-dropdown-menu`
+- Lottie Player
+  - `npm install @lottiefiles/react-lottie-player`
 - Generate key in Node
   - `node -e "console.log(crypto.randomBytes(32).toString('hex'))"`
 
