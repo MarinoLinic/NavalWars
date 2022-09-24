@@ -1,5 +1,7 @@
-const http_fetch: any = {
-  get: async function (address: string) {
+import { CharacterData } from "./http_data";
+
+export const http_fetch: any = {
+  get: async function (sessionId: string, address: string) {
     let data = fetch("http://localhost:3000/api/" + address, {
       method: "GET",
       headers: {
@@ -8,9 +10,9 @@ const http_fetch: any = {
     });
   },
 
-  post: async function (address: string, data: any) {
+  post: async function (sessionId: string, address: string, data: any) {
     fetch("http://localhost:3000/api/" + address, {
-      body: JSON.stringify(data),
+      body: JSON.stringify({sessionId, ...data}),
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,9 +20,9 @@ const http_fetch: any = {
     });
   },
 
-  put: async function (address: string, data: any) {
+  put: async function (sessionId: string, address: string, data: any) {
     fetch("http://localhost:3000/api/" + address, {
-      body: JSON.stringify(data),
+      body: JSON.stringify({sessionId, ...data}),
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -28,9 +30,9 @@ const http_fetch: any = {
     });
   },
 
-  delete: async function (address: string, data: any) {
+  delete: async function (sessionId: string, address: string, data: any) {
     fetch("http://localhost:3000/api/" + address, {
-      body: JSON.stringify(data),
+      body: JSON.stringify({sessionId, ...data}),
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -39,4 +41,6 @@ const http_fetch: any = {
   },
 };
 
-export default http_fetch;
+export const characterAdd = async (sessionId: string, userEmail: string, data: CharacterData) => http_fetch.post(sessionId, "characters/create", {userEmail, ...data});
+export const characterChange = async (sessionId: string, data: CharacterData) => http_fetch.put(sessionId, "characters/change", data);
+export const characterDelete = async (id: number) => http_fetch.delete("characters/delete", { id : id });

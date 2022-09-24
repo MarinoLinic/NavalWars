@@ -1,5 +1,9 @@
 import { useState } from "react";
-import http_fetch from "../../utils/http_fetch";
+import {
+  characterChange,
+  characterDelete,
+  http_fetch,
+} from "../../utils/http_fetch";
 import { Character } from "./character";
 import { useRouter } from "next/router";
 
@@ -72,7 +76,7 @@ function characterInfo(
       <button
         className="mx-4"
         onClick={() => {
-          http_fetch.delete("characters/delete", { id: character.id });
+          characterDelete(character.id);
           refreshData(true);
         }}
       >
@@ -104,7 +108,7 @@ function characterEdit(
           />
           <button
             onClick={() => {
-              http_fetch.put("characters/change", {
+              characterChange("", {
                 name: characterNameChange,
                 id: character.id,
               });

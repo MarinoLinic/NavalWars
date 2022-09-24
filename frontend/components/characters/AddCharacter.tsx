@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import http_fetch from "../../utils/http_fetch";
+import { http_fetch, characterAdd } from "../../utils/http_fetch";
 import AvatarList from "./AvatarList";
 
 interface props {
@@ -43,11 +43,15 @@ function characterCreate(session: any, refreshData: Function) {
             onClick={() => {
               // if (characterName === "") alert("Character name is empty!");
               // else {
-              http_fetch.post("characters/create", {
-                userEmail: session?.data?.user?.email,
+              characterAdd(session?.id, session?.data?.user?.email, {
                 name: characterName,
                 avatar: characterAvatar,
               });
+              // http_fetch.post("characters/create", {
+              //   userEmail: session?.data?.user?.email,
+              //   name: characterName,
+              //   avatar: characterAvatar,
+              // });
               setCharacterName("");
               refreshData(true);
               // }

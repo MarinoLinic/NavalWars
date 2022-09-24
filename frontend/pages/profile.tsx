@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState, useRef } from "react";
-import http_fetch from "../utils/http_fetch";
+import { http_fetch } from "../utils/http_fetch";
 
 function Profile() {
   const session = useSession();

@@ -1,4 +1,4 @@
-import http_fetch from "../../utils/http_fetch";
+import { http_fetch } from "../../utils/http_fetch";
 
 export class Character {
   public readonly id: number;
