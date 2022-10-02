@@ -59,6 +59,8 @@ model Character {
   userEmail          String?
   name               String              @db.VarChar(50)
   avatar             String              @db.VarChar(255)
+  x                  Int 
+  y                  Int 
   User               User?               @relation(fields: [userEmail], references: [email]) // foreign key referencing User.id
   Buildings          Buildings?
   Tasks_Construction Task_Construction[]

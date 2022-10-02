@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { http_fetch, characterAdd } from "../../utils/http_fetch";
+import { characterAdd } from "../../utils/http_fetch";
 import AvatarList from "./AvatarList";
 
 interface props {
