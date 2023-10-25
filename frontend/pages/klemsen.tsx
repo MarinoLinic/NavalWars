@@ -19,7 +19,7 @@ function Cornelius() {
   return (
     <>
       <div>
-        <p>Klemsen er en bøsset sølvfisk</p>
+        <p>Klemsen er</p>
         <button onClick={() => setklemens(klemens + "s")}>Click me!</button>
         {useState("klemens")[0]}
         {klemens}
